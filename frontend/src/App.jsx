@@ -1,3 +1,4 @@
+console.log("Dashboard Rendered");
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import Login from "./pages/Login";
@@ -6,6 +7,7 @@ import MySlots from "./pages/MySlots";
 import Attendance from "./pages/Attendance";
 import MainLayout from "./layouts/MainLayout";
 import Announcements from "./pages/Announcements";
+import SlotDetails from "./pages/SlotDetails";
 
 function App(){
   return(
@@ -19,6 +21,7 @@ function App(){
           <Route path="/myslots" element={<MySlots />} />
           <Route path="/attendance" element={<Attendance />} />
           <Route path="/announcements" element={<Announcements />} />
+          <Route path="/slotdetails/:id" element={<SlotDetails />} />
 
         </Route>
 

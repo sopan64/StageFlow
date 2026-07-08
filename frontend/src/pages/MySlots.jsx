@@ -1,6 +1,6 @@
 function MySlots(){
     return (
-        <p>My Slots</p>
+        <h2>My Slots</h2>
     );
 }
 export default MySlots;

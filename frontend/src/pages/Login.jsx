@@ -20,9 +20,6 @@ function Login() {
         }
         setLoggedInUser(username);
 
-        console.log(username);
-        console.log(password);
-
         setUsername("");
         setPassword("");
 
@@ -54,7 +51,7 @@ function Login() {
                 />
 
                 <Button 
-                    text="Sign In"
+                    text="Sigdfhn In"
                     onClick={handleLogin}
                 />
                 <Button text="Register" />
