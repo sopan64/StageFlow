@@ -1,12 +1,13 @@
 import "../styles/EventCard.css";
 import Button from "./Button";
+import event from "../data/events";
 import { useNavigate } from "react-router-dom";
 
-function handleViewDetails(){
+/*function handleViewDetails(){
     navigate("/slotdetails");
-}
+}*/
 
-function EventCard(){
+function EventCard({event}){
     const navigate = useNavigate();
 
     function handleViewDetails(){
@@ -15,9 +16,9 @@ function EventCard(){
     return(
         <div className="event-card">
             <h2>Current Event</h2>
-            <h3>Annual Night 2026</h3>
-            <p><strong>Date:</strong> 25 july 2026</p>
-            <p><strong>Days Left:</strong> 12</p>
+            <h3>{event.name}</h3>
+            <p><strong>Date:</strong> {event.date}</p>
+            <p><strong>Days Left:</strong> {event.daysLeft}</p>
             <Button 
                 text="View Detais" 
                 className="view-btn" 

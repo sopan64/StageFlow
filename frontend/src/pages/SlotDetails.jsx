@@ -1,29 +1,7 @@
 import { useParams } from "react-router-dom";
 
-function SlotDetails(){
-    const slots = [
-    {
-        id: 1,
-        name: "Acoustic Band",
-        coordinator: "Rahul",
-        time: "5:00 PM",
-        members: 6
-    },
-    {
-        id: 2,
-        name: "Final Performance",
-        coordinator: "Priya",
-        time: "7:00 PM",
-        members: 10
-    },
-    {
-        id: 3,
-        name: "Opening Ceremony",
-        coordinator: "Aman",
-        time: "4:00 PM",
-        members: 8
-    }
-    ];
+function SlotDetails({slots}){
+    
     const { id } = useParams();
 
     const slot = slots.find(
@@ -41,6 +19,7 @@ function SlotDetails(){
             <p>Coordinator: {slot.coordinator}</p>
             <p>Time: {slot.time}</p>
             <p>Members: {slot.members}</p>
+            <p>Venue: {slot.venue}</p>
         </>
     );
 }

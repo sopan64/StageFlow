@@ -15,7 +15,7 @@ function Login() {
     function handleLogin(){
 
         if(username === "" || password === ""){
-            alert("Please fill all the fields");
+            alert("Please fill all the fields!");
             return;
         }
         setLoggedInUser(username);
@@ -51,7 +51,7 @@ function Login() {
                 />
 
                 <Button 
-                    text="Sigdfhn In"
+                    text="Sign In"
                     onClick={handleLogin}
                 />
                 <Button text="Register" />

@@ -1,6 +1,6 @@
 function Input(props) {
     return (
-        <input
+        <input className="input-field"
             type={props.type}
             placeholder={props.placeholder}
             value={props.value}

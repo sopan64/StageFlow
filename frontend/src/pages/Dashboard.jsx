@@ -2,25 +2,16 @@ import EventCard from "../components/EventCard";
 import MySlotsCard from "../components/MySlotsCard";
 import UpdatesCard from "../components/UpdatesCard";
 import "../styles/Dashboard.css";
+import updates from "../data/updates";
+import event from "../data/events";
 
-const updates = [
-    "Slot 2 timing changed",
-    "Aman added to slot 1",
-    "Coordinator changed for slot 3"
-];
+function Dashboard({ slots, handleDeleteSlot}){
 
-const slots = [
-    { id: 1, name: "Acoustic Band"},
-    { id: 2, name: "Final Performance"},
-    { id: 3, name: "Opening Ceremony"}
-];
-
-function Dashboard(){
     return (
         <div className="dashboard">
-            <EventCard />
+            <EventCard event={event} />
             <UpdatesCard updates={updates}/>
-            <MySlotsCard slots={slots}/>
+            <MySlotsCard slots={slots} handleDeleteSlot={handleDeleteSlot}/>
         </div>
     );
 }

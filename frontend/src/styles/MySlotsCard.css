@@ -12,10 +12,23 @@
 }
 
 .slot-item{
-    cursor: pointer;
-    padding: 8px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    margin: 12px 0;
+    padding: 10px 14px;
+
+    background: white;
+    border-radius: 8px;
 }
 
-.slot-item:hover{
-    color: royalblue;
+.slot-actions{
+    display: flex;
+    gap: 10px;
+}
+
+.slot-name{
+    cursor: pointer;
+    font-weight: 600;
 }

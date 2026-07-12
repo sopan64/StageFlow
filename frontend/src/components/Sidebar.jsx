@@ -9,6 +9,7 @@ function Sidebar(){
         <div className="sidebar">
 
             <NavLink to="/dashboard">Dashboard</NavLink>
+            <NavLink to="/admin">Admin</NavLink>
             <NavLink to="/myslots">My Slots</NavLink>
             <NavLink to="/attendance">Attendance</NavLink>
             <NavLink to="/announcements">Announcements</NavLink>
