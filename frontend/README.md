@@ -1,16 +1,124 @@
-# React + Vite
+# 🎭 StageFlow
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+![Status](https://img.shields.io/badge/Status-Under%20Development-orange)
+![React](https://img.shields.io/badge/React-61DAFB?logo=react&logoColor=white)
 
-Currently, two official plugins are available:
+A modern React-based Club Event & Practice Management System designed to simplify event organization, practice scheduling, and slot management for college clubs.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+> 🚧 Currently under active development.
 
-## React Compiler
+## 📖 Overview
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+StageFlow is inspired by the workflow of college cultural clubs, providing a centralized platform where administrators can manage events and practice slots while members can view schedules, access slot details, and stay updated with event information.
 
-## Expanding the ESLint configuration
+The project is being developed incrementally while learning modern React development, with a focus on reusable components, client-side routing, shared state management, and real-world CRUD functionality.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## ✨ Features
+
+### Currently Implemented
+
+- Dashboard with current event overview
+- Slot Management (Create, Read, Update, Delete)
+- Dynamic Slot Details page
+- Admin panel for managing slots
+- Shared state management using React Hooks
+- Client-side routing with React Router
+- Reusable React components
+- Form validation for slot creation and editing
+
+### In Progress
+
+- Attendance Management
+- Announcements
+- Role-based access (Admin & Member)
+- Backend integration (Node.js & Express)
+- MongoDB database
+- Authentication
+
+## 🛠️ Tech Stack
+
+### Frontend
+
+- React
+- React Router
+- JavaScript
+- HTML5
+- CSS3
+
+### Tools
+
+- Git
+- GitHub
+- VS Code
+- Vite
+
+## 📂 Project Structure
+
+```text
+src/
+├── components/
+├── pages/
+├── layouts/
+├── styles/
+├── data/
+├── App.jsx
+└── main.jsx
+```
+
+## 🚀 Getting Started
+
+Clone the repository
+
+```bash
+git clone https://github.com/sopan64/StageFlow.git
+```
+
+Navigate to the project directory
+
+```bash
+cd StageFlow
+```
+
+Install dependencies
+
+```bash
+npm install
+```
+
+Run the development server
+
+```bash
+npm run dev
+```
+
+## 🎯 What I'm Learning
+
+Through this project, I'm gaining practical experience in:
+
+- React component architecture
+- React Router
+- State management
+- CRUD operations
+- Form validation
+- Frontend application design
+- Full-stack web development
+
+## 📌 Project Status
+
+🚧 The project is currently focused on frontend development.
+
+Upcoming milestones include:
+
+- Backend integration (Node.js + Express)
+- MongoDB database
+- Authentication
+- Attendance Management
+- Announcements
+- Deployment
+
+## 👨‍💻 Author
+
+**Sopan Dharmpuri Avdhutwar**
+
+- GitHub: https://github.com/sopan64
+- LinkedIn: https://www.linkedin.com/in/sopan-avdhutwar
