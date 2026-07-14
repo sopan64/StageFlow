@@ -55,14 +55,14 @@ The project is being developed incrementally while learning modern React develop
 ## 📂 Project Structure
 
 ```text
-src/
-├── components/
-├── pages/
-├── layouts/
-├── styles/
-├── data/
-├── App.jsx
-└── main.jsx
+StageFlow/
+├── frontend/
+│   ├── src/
+│   ├── public/
+│   ├── package.json
+│   ├── vite.config.js
+│   └── ...
+└── README.md
 ```
 
 ## 🚀 Getting Started
@@ -76,7 +76,7 @@ git clone https://github.com/sopan64/StageFlow.git
 Navigate to the project directory
 
 ```bash
-cd StageFlow
+cd StageFlow/frontend
 ```
 
 Install dependencies
