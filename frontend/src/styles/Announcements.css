@@ -1,0 +1,18 @@
+.announcements-page {
+    max-width: 800px;
+    margin: 30px auto;
+    padding: 20px;
+}
+
+.announcements-page h2 {
+    margin-bottom: 15px;
+}
+
+.announcement {
+    padding: 15px 0;
+    border-bottom: 1px solid #ddd;
+}
+
+.announcement:last-child {
+    border-bottom: none;
+}

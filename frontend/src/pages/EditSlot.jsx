@@ -5,7 +5,7 @@ import Input from "../components/Input";
 import Button from "../components/Button";
 import "../styles/EditSlot.css";
 
-function EditSlot({ slots, setSlots }){
+function EditSlot({ slots, setSlots, announcements, setAnnouncements }){
 
     const { id } = useParams();
 
@@ -30,6 +30,14 @@ function EditSlot({ slots, setSlots }){
             setError("Please fill all fields!");
             return;
         }
+
+        const newAnnouncement = {
+            id: Date.now(),
+            type: "system",
+            message: `Slot "${name}" has been updated!`,
+            date: new Date().toLocaleDateString("en-GB")
+        };
+
         setSlots(
             slots.map((slot) =>{
                 if(slot.id === Number(id)){
@@ -46,7 +54,12 @@ function EditSlot({ slots, setSlots }){
                 return slot;
             })
         );
-        navigate("/dashboard");
+        setAnnouncements((prevAnnouncements) => [
+            newAnnouncement,
+            ...prevAnnouncements
+        ]);
+
+        navigate("/manage-slots");
     }
 
     return (

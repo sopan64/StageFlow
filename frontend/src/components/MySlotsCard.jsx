@@ -2,7 +2,7 @@ import "../styles/MySlotsCard.css";
 import { useNavigate } from "react-router-dom";
 import Button from "./Button";
 
-function MySlotsCard({ slots, handleDeleteSlot }){
+function MySlotsCard({ slots }){
     const navigate = useNavigate();
 
     return (
@@ -20,18 +20,6 @@ function MySlotsCard({ slots, handleDeleteSlot }){
                         >
                             {slot.name}
                         </p>
-
-                        <div className="slot-actions">
-
-                            <Button
-                                text="Edit"
-                                onClick={() => navigate(`/edit-slot/${slot.id}`)}
-                            />
-                            <Button
-                                text="Delete"
-                                onClick={() => handleDeleteSlot(slot.id)}
-                            />
-                        </div>
 
                     </div>
                 ))

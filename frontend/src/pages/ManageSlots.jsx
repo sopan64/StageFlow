@@ -2,9 +2,9 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Input from "../components/Input";
 import Button from "../components/Button";
-import "../styles/Admin.css";
+import "../styles/ManageSlots.css";
 
-function Admin({ slots, setSlots }) {
+function ManageSlots({ slots, setSlots, handleDeleteSlot, announcements, setAnnouncements }){
     const [error, setError] = useState("");
     const [name, setName] = useState("");
     const [coordinator, setCoordinator] = useState("");
@@ -28,18 +28,32 @@ function Admin({ slots, setSlots }) {
             members: Number(members),
             venue
         };
+
+        const newAnnouncement = {
+            id: Date.now()+1,
+            type: "system",
+            message: `New slot "${name}" has been created!`,
+            date: new Date().toLocaleDateString("en-GB")
+        };
+
         setSlots([...slots, newslot]);
+        setAnnouncements((prevAnnouncements) => [
+            newAnnouncement,
+            ...prevAnnouncements
+        ]);
+
         setName("");
         setCoordinator("");
         setTime("");
         setMembers("");
+        setVenue("");
         setError("");
-        navigate("/dashboard");
+        navigate("/manage-slots");
     }
 
     return (
         <div className="admin-page">
-            <h1>Admin Panel</h1>
+            <h1>Manage Slots</h1>
 
             {
                 error && <p className="error">{error}</p>
@@ -84,9 +98,33 @@ function Admin({ slots, setSlots }) {
                 className="form-btn"
                 onClick={handleCreateSlot}
             />
+            <hr />
+            <h2>All Slots</h2>
+
+            {
+                slots.map((slot) => (
+                    <div key={slot.id}>
+                        <p
+                            onClick={() => navigate(`/slotdetails/${slot.id}`)}
+                            className="slot-name"
+                        >{slot.name}</p>
+                        
+                        <div className="slot-actions">
+                            <Button 
+                                text="Edit"
+                                onClick={() => navigate(`/edit-slot/${slot.id}`)}
+                            />
+                            <Button 
+                                text="Delete"
+                                onClick={() => handleDeleteSlot(slot.id)}
+                            />
+                        </div>
+                    </div>
+                ))
+            }
 
         </div>
     );
 }
 
-export default Admin;
+export default ManageSlots;
