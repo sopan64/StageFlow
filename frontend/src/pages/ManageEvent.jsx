@@ -1,11 +1,14 @@
 import { useState } from "react";
 import Input from "../components/Input";
 import Button from "../components/Button";
+import { Navigate, useNavigate } from "react-router-dom";
+import "../styles/ManageEvent.css";
 
 function ManageEvent({event, setEvent}) {
     const [name, setName] = useState(event.name);
     const [date, setDate] = useState(event.date);
     const [venue, setVenue] = useState(event.venue);
+    const navigate = useNavigate();
 
     function handleSaveChanges(){
         setEvent({
@@ -13,11 +16,13 @@ function ManageEvent({event, setEvent}) {
             date,
             venue
         });
+
+        navigate("/dashboard", {replace: true});
     }
 
     return (
-        <div>
-            <h3>Manage Event</h3>
+        <div className="manage-event">
+            <h2>Manage Event</h2>
             <Input 
                 type="text"
                 placeholder="Event Name"

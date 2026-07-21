@@ -1,18 +1,38 @@
 .announcements-page {
-    max-width: 800px;
+    max-width: 500px;
     margin: 30px auto;
-    padding: 20px;
+}
+
+.announcements-container {
+    background: white;
+    border-radius: 12px;
+    padding: 25px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
 }
 
 .announcements-page h2 {
-    margin-bottom: 15px;
+    margin-bottom: 20px;
 }
 
-.announcement {
-    padding: 15px 0;
-    border-bottom: 1px solid #ddd;
+.announcement-item {
+    padding: 18px 0;
+    border-bottom: 1px solid #e5e7eb;
 }
 
-.announcement:last-child {
+.announcement-item:last-child {
     border-bottom: none;
+}
+
+.announcement-item h4 {
+    margin-bottom: 10px;
+}
+
+.announcement-item p {
+    margin: 6px 0;
+    line-height: 1.5;
+}
+
+.announcement-date {
+    color: #6b7280;
+    font-size: 14px;
 }

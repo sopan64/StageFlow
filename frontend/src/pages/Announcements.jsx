@@ -5,15 +5,22 @@ function Announcements({ announcements }) {
     return (
         <div className="announcements-page">
             <h2>Announcements</h2>
-            {
+            <div className="announcements-container">
+                {
                 announcements.map((announcement) => (
-                    <div key={announcement.id} className="announcement">
-                        {announcement.type === "admin" ? <p>📢 Admin</p> : <p>🔔 System</p>}
+                    <div key={announcement.id} className="announcement-item">
+                        <h4>
+                            {announcement.type === "admin"
+                                ? "📢 Admin"
+                                : "🔔 System"
+                            }
+                        </h4>
                         <p>{announcement.message}</p>
-                        <p>{announcement.date}</p>
+                        <p className="announcement-date">{announcement.date}</p>
                     </div>
                 ))
-            }
+                }
+            </div>
         </div>
     );
 }

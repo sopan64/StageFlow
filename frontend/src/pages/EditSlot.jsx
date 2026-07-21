@@ -35,7 +35,13 @@ function EditSlot({ slots, setSlots, announcements, setAnnouncements }){
             id: Date.now(),
             type: "system",
             message: `Slot "${name}" has been updated!`,
-            date: new Date().toLocaleDateString("en-GB")
+            date: new Date().toLocaleDateString("en-GB", {
+                day: "2-digit",
+                month: "2-digit",
+                year: "numeric",
+                hour: "2-digit",
+                minute: "2-digit"
+            })
         };
 
         setSlots(
@@ -59,7 +65,7 @@ function EditSlot({ slots, setSlots, announcements, setAnnouncements }){
             ...prevAnnouncements
         ]);
 
-        navigate("/manage-slots");
+        navigate("/manage-slots", {replace: true});
     }
 
     return (

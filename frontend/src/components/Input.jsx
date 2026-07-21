@@ -1,6 +1,8 @@
+import "../styles/Input.css";
+
 function Input(props) {
     return (
-        <input className="input-field"
+        <input className={`input-field ${props.className || ""}`}
             type={props.type}
             placeholder={props.placeholder}
             value={props.value}

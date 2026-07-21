@@ -33,7 +33,13 @@ function ManageSlots({ slots, setSlots, handleDeleteSlot, announcements, setAnno
             id: Date.now()+1,
             type: "system",
             message: `New slot "${name}" has been created!`,
-            date: new Date().toLocaleDateString("en-GB")
+            date: new Date().toLocaleDateString("en-GB", {
+                day: "2-digit",
+                month: "2-digit",
+                year: "numeric",
+                hour: "2-digit",
+                minute: "2-digit"
+            })
         };
 
         setSlots([...slots, newslot]);
@@ -41,14 +47,14 @@ function ManageSlots({ slots, setSlots, handleDeleteSlot, announcements, setAnno
             newAnnouncement,
             ...prevAnnouncements
         ]);
-
+        
         setName("");
         setCoordinator("");
         setTime("");
         setMembers("");
         setVenue("");
         setError("");
-        navigate("/manage-slots");
+        navigate("/manage-slots", {replace: true});
     }
 
     return (
@@ -116,7 +122,14 @@ function ManageSlots({ slots, setSlots, handleDeleteSlot, announcements, setAnno
                             />
                             <Button 
                                 text="Delete"
-                                onClick={() => handleDeleteSlot(slot.id)}
+                            onClick={() => {
+                                const confirmDelete = window.confirm(
+                                    `Delete "${slot.name}"?`
+                                );
+                                if(confirmDelete){
+                                    handleDeleteSlot(slot.id);
+                                }
+                            }}
                             />
                         </div>
                     </div>

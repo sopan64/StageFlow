@@ -1,4 +1,5 @@
 import { useParams } from "react-router-dom";
+import "../styles/SlotDetails.css";
 
 function SlotDetails({slots}){
     
@@ -13,14 +14,14 @@ function SlotDetails({slots}){
     }
 
     return (
-        <>
+        <div className="slot-details">
             <h1>Slot Details</h1>
             <h2>{slot.name}</h2>
             <p>Coordinator: {slot.coordinator}</p>
             <p>Time: {slot.time}</p>
             <p>Members: {slot.members}</p>
             <p>Venue: {slot.venue}</p>
-        </>
+        </div>
     );
 }
 export default SlotDetails;

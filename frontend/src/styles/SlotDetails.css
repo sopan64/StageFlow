@@ -1,0 +1,17 @@
+.slot-details {
+    max-width: 350px;
+    margin: 30px auto;
+    padding: 25px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.slot-details h2 {
+    margin-bottom: 20px;
+}
+
+.slot-details p {
+    margin: 12px 0;
+    font-size: 16px;
+}

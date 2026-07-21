@@ -1,6 +1,6 @@
 const event = {
-    name: "Annual Night 2026",
-    date: "2026-07-20",
+    name: "Independence Day 2026",
+    date: "2026-08-15",
     venue: "VNIT Auditorium"
 };
 
