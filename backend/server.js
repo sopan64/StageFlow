@@ -1,17 +1,31 @@
+require("dotenv").config();
+
 const express = require("express");
+const slotsRouter = require("./routes/slots");
+
 const app = express();
+
+const mongoose = require("mongoose");
+
+mongoose.connect(process.env.MONGO_URI, {
+    serverSelectionTimeoutMS: 5000,
+})
+.then(() => {
+    console.log("✅ Connected");
+})
+.catch((err) => {
+    console.log(err.name);
+    console.log(err.message);
+    console.log(err);
+});
+
+app.use(express.json());
 
 app.get("/", (req, res) => {
     res.send("Hello from SageFlow Backend!");
 });
 
-app.get("/event", (req, res) => {
-    res.json({
-        name: "Annual Night",
-        date: "25 jul 2026",
-        venue: "VNIT Nagpur"
-    });
-});
+app.use("/slots", slotsRouter);
 
 app.listen(5000, () => {
     console.log("Server is running on port 5000");
