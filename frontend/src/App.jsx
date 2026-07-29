@@ -1,6 +1,5 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { useState } from "react";
-import initialslots from "./data/slots"
+import { useState, useEffect } from "react";
 import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
 import Attendance from "./pages/Attendance";
@@ -16,17 +15,30 @@ import initialevent from "./data/events";
 
 function App(){
 
-  const [slots, setSlots] = useState(initialslots);
+  const [slots, setSlots] = useState([]);
   const [announcements, setAnnouncements] = useState(initialAnnouncements);
   const [event, setEvent] = useState(initialevent);
 
-  function handleDeleteSlot(id){
-    const slotToDelete = slots.find((slot) => slot.id === id);
+  useEffect(() => {
+    async function fetchSlots(){
+
+      const response = await fetch("http://localhost:5000/slots");
+      const data = await response.json();
+
+      setSlots(data);
+    }
+
+    fetchSlots();
+
+  }, []);
+
+  async function handleDeleteSlot(id){
+    const slotToDelete = slots.find((slot) => slot._id === id);
 
     const newAnnouncement = {
       id: Date.now(),
       type: "system",
-      message: `Slot "${slotToDelete.name}" has been deleted!`,
+      message: `Slot "${slotToDelete.title}" has been deleted!`,
       date: new Date().toLocaleDateString("en-GB", {
         day: "2-digit",
         month: "2-digit",
@@ -36,16 +48,26 @@ function App(){
       })
     };
 
-    setAnnouncements((prevAnnouncements) => [
-      newAnnouncement,
-      ...prevAnnouncements
-    ]);
+    try{
+      const response = await fetch(`http://localhost:5000/slots/${id}`, {
+        method: "DELETE",
+      });
 
-    setSlots(
-      slots.filter(
-        (slot) => slot.id !== id
-      )
-    );
+      if(!response.ok){
+        throw new Error("Failed to delete the slot");
+      }
+
+      setSlots((prevSlots) => prevSlots.filter((slot) => slot._id !== id));
+
+      setAnnouncements((prevAnnouncements) => [
+        newAnnouncement,
+        ...prevAnnouncements
+      ]);
+    }
+    catch (err) {
+      console.log(err);
+    }
+
   }
 
   return(

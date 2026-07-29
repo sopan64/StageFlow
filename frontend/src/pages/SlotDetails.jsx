@@ -6,7 +6,7 @@ function SlotDetails({slots}){
     const { id } = useParams();
 
     const slot = slots.find(
-        (slot) => slot.id === Number(id)
+        (slot) => slot._id === id
     );
     
     if(!slot){
@@ -16,7 +16,7 @@ function SlotDetails({slots}){
     return (
         <div className="slot-details">
             <h1>Slot Details</h1>
-            <h2>{slot.name}</h2>
+            <h2>{slot.title}</h2>
             <p>Coordinator: {slot.coordinator}</p>
             <p>Time: {slot.time}</p>
             <p>Members: {slot.members}</p>

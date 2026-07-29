@@ -11,14 +11,14 @@ function MySlotsCard({ slots }){
             {
                 slots.map((slot) => (
                     <div
-                        key={slot.id}
+                        key={slot._id}
                         className="slot-item"
                     >
                         <p
-                            onClick={() => navigate(`/slotdetails/${slot.id}`)}
+                            onClick={() => navigate(`/slotdetails/${slot._id}`)}
                             className="slot-name"
                         >
-                            {slot.name}
+                            {slot.title}
                         </p>
 
                     </div>

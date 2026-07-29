@@ -11,11 +11,6 @@ const slotSchema = new mongoose.Schema({
         required: true,
     },
 
-    date: {
-        type: String,
-        required: true,
-    },
-
     time: {
         type: String,
         required: true,
@@ -27,8 +22,8 @@ const slotSchema = new mongoose.Schema({
     },
 
     members: {
-        type: [String],
-        default: [],
+        type: Number,
+        required: true,
     },
 }, {
     timestamps: true,

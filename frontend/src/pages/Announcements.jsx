@@ -8,7 +8,7 @@ function Announcements({ announcements }) {
             <div className="announcements-container">
                 {
                 announcements.map((announcement) => (
-                    <div key={announcement.id} className="announcement-item">
+                    <div key={announcement._id} className="announcement-item">
                         <h4>
                             {announcement.type === "admin"
                                 ? "📢 Admin"

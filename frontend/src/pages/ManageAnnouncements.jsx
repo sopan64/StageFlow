@@ -31,7 +31,7 @@ function ManageAnnouncements({ announcements, setAnnouncements }) {
 
     function handleDeleteAnnouncement(id) {
         setAnnouncements((prevAnnouncements) =>
-            prevAnnouncements.filter((announcement) => announcement.id !== id)
+            prevAnnouncements.filter((announcement) => announcement._id !== id)
         );
     }
 
@@ -53,7 +53,7 @@ function ManageAnnouncements({ announcements, setAnnouncements }) {
 
             {announcements.map((announcement) => (
                 <div 
-                    key={announcement.id}
+                    key={announcement._id}
                     className="announcement-item"
                 >
                     <p>
@@ -70,7 +70,7 @@ function ManageAnnouncements({ announcements, setAnnouncements }) {
                             <div className="announcement-actions">
                                 <Button
                                     text="Delete"
-                                    onClick={() => handleDeleteAnnouncement(announcement.id)}
+                                    onClick={() => handleDeleteAnnouncement(announcement._id)}
                                 />
                             </div>
                         )

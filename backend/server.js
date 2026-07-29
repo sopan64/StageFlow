@@ -2,6 +2,7 @@ require("dotenv").config();
 
 const express = require("express");
 const slotsRouter = require("./routes/slots");
+const cors = require("cors");
 
 const app = express();
 
@@ -19,6 +20,7 @@ mongoose.connect(process.env.MONGO_URI, {
     console.log(err);
 });
 
+app.use(cors());
 app.use(express.json());
 
 app.get("/", (req, res) => {

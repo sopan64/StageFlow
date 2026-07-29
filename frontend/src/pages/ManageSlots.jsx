@@ -13,16 +13,15 @@ function ManageSlots({ slots, setSlots, handleDeleteSlot, announcements, setAnno
     const [venue, setVenue] = useState("");
     const navigate = useNavigate();
 
-    function handleCreateSlot(){
-
+    async function handleCreateSlot(){
+        
         if(!name || !coordinator || !time || !members || !venue){
             setError("Please fill all fields!");
             return;
         }
 
         const newslot = {
-            id: Date.now(),
-            name,
+            title: name,
             coordinator,
             time,
             members: Number(members),
@@ -42,7 +41,25 @@ function ManageSlots({ slots, setSlots, handleDeleteSlot, announcements, setAnno
             })
         };
 
-        setSlots([...slots, newslot]);
+        try {
+        const response = await fetch("http://localhost:5000/slots", {
+
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+
+            body: JSON.stringify(newslot)
+        });
+
+        if(!response.ok) {
+            throw new Error("Failed to create slot!");
+        }
+
+        const data = await response.json();
+
+        setSlots((prevSlots) => [...prevSlots, data.slot]);
+
         setAnnouncements((prevAnnouncements) => [
             newAnnouncement,
             ...prevAnnouncements
@@ -55,6 +72,10 @@ function ManageSlots({ slots, setSlots, handleDeleteSlot, announcements, setAnno
         setVenue("");
         setError("");
         navigate("/manage-slots", {replace: true});
+        }
+        catch (err) {
+            setError(err.message);
+        }
     }
 
     return (
@@ -109,25 +130,25 @@ function ManageSlots({ slots, setSlots, handleDeleteSlot, announcements, setAnno
 
             {
                 slots.map((slot) => (
-                    <div key={slot.id}>
+                    <div key={slot._id}>
                         <p
-                            onClick={() => navigate(`/slotdetails/${slot.id}`)}
+                            onClick={() => navigate(`/slotdetails/${slot._id}`)}
                             className="slot-name"
-                        >{slot.name}</p>
+                        >{slot.title}</p>
                         
                         <div className="slot-actions">
                             <Button 
                                 text="Edit"
-                                onClick={() => navigate(`/edit-slot/${slot.id}`)}
+                                onClick={() => navigate(`/edit-slot/${slot._id}`)}
                             />
                             <Button 
                                 text="Delete"
                             onClick={() => {
                                 const confirmDelete = window.confirm(
-                                    `Delete "${slot.name}"?`
+                                    `Are you sure want to Delete "${slot.title}"?`
                                 );
                                 if(confirmDelete){
-                                    handleDeleteSlot(slot.id);
+                                    handleDeleteSlot(slot._id);
                                 }
                             }}
                             />

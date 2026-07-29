@@ -10,14 +10,14 @@ function EditSlot({ slots, setSlots, announcements, setAnnouncements }){
     const { id } = useParams();
 
     const slot = slots.find(
-        (slot) => slot.id === Number(id)
+        (slot) => slot._id === id
     );
 
     if(!slot){
         return <h2>Slot not found!</h2>;
     }
 
-    const [name, setName] = useState(slot.name);
+    const [name, setName] = useState(slot.title);
     const [coordinator, setCoordinator] = useState(slot.coordinator);
     const [time, setTime] = useState(slot.time);
     const [members, setMembers] = useState(slot.members);
@@ -25,7 +25,7 @@ function EditSlot({ slots, setSlots, announcements, setAnnouncements }){
     const [error, setError] = useState("");
     const navigate = useNavigate();
 
-    function handleUpdateSlot(){
+    async function handleUpdateSlot(){
         if(!name || !coordinator || !time || !members || !venue){
             setError("Please fill all fields!");
             return;
@@ -44,28 +44,45 @@ function EditSlot({ slots, setSlots, announcements, setAnnouncements }){
             })
         };
 
-        setSlots(
-            slots.map((slot) =>{
-                if(slot.id === Number(id)){
-                    return {
-                        id: slot.id,
-                        name,
-                        coordinator,
-                        time,
-                        members: Number(members),
-                        venue
-                    };
-                }
+        const updatedSlot = {
+            title: name,
+            coordinator,
+            time,
+            members: Number(members),
+            venue
+        };
+        
+        try{
+            const response = await fetch(`http://localhost:5000/slots/${id}`, {
+                method: "PUT",
+                headers: {
+                    "content-Type": "application/json"
+                },
 
-                return slot;
-            })
-        );
-        setAnnouncements((prevAnnouncements) => [
-            newAnnouncement,
-            ...prevAnnouncements
-        ]);
+                body: JSON.stringify(updatedSlot)
+            });
 
-        navigate("/manage-slots", {replace: true});
+            if(!response.ok){
+                throw new Error("Faild to edit slot!");
+            }
+
+            const data = await response.json();
+
+            setSlots((prevSlots) => 
+                prevSlots.map((slot) => slot._id === id? data.slot : slot)
+            );
+
+            setAnnouncements((prevAnnouncements) => [
+                newAnnouncement,
+                ...prevAnnouncements
+            ]);
+
+            navigate("/manage-slots", {replace: true});
+
+        } 
+        catch (err) {
+            console.log(err);
+        }
     }
 
     return (
