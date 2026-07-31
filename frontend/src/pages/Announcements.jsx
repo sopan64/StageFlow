@@ -16,7 +16,15 @@ function Announcements({ announcements }) {
                             }
                         </h4>
                         <p>{announcement.message}</p>
-                        <p className="announcement-date">{announcement.date}</p>
+                        <p className="announcement-date">
+                            {new Date(announcement.createdAt).toLocaleDateString("en-GB", {
+                                day: "2-digit",
+                                month: "2-digit",
+                                year: "numeric",
+                                hour: "2-digit",
+                                minute: "2-digit"
+                            })}
+                        </p>
                     </div>
                 ))
                 }

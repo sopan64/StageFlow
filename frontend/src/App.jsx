@@ -8,7 +8,6 @@ import Announcements from "./pages/Announcements";
 import SlotDetails from "./pages/SlotDetails";
 import ManageSlots from "./pages/ManageSlots";
 import EditSlot from "./pages/EditSlot";
-import initialAnnouncements from "./data/announcements";
 import ManageAnnouncements from "./pages/ManageAnnouncements";
 import ManageEvent from "./pages/ManageEvent";
 import initialevent from "./data/events";
@@ -16,19 +15,22 @@ import initialevent from "./data/events";
 function App(){
 
   const [slots, setSlots] = useState([]);
-  const [announcements, setAnnouncements] = useState(initialAnnouncements);
+  const [announcements, setAnnouncements] = useState([]);
   const [event, setEvent] = useState(initialevent);
 
   useEffect(() => {
-    async function fetchSlots(){
+    async function fetchInitialDetails(){
 
-      const response = await fetch("http://localhost:5000/slots");
-      const data = await response.json();
+      const slotsResponse = await fetch("http://localhost:5000/slots");
+      const announcementsResponse = await fetch("http://localhost:5000/announcements");
+      const slotsData = await slotsResponse.json();
+      const announcementsData = await announcementsResponse.json();
 
-      setSlots(data);
+      setSlots(slotsData);
+      setAnnouncements(announcementsData)
     }
 
-    fetchSlots();
+    fetchInitialDetails();
 
   }, []);
 
@@ -50,11 +52,11 @@ function App(){
 
     try{
       const response = await fetch(`http://localhost:5000/slots/${id}`, {
-        method: "DELETE",
+        method: "DELETE"
       });
 
       if(!response.ok){
-        throw new Error("Failed to delete the slot");
+        throw new Error("Failed to Delete the slot");
       }
 
       setSlots((prevSlots) => prevSlots.filter((slot) => slot._id !== id));

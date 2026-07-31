@@ -9,7 +9,8 @@ router.get("/", async (req, res) => {
         const slots = await Slot.find();
 
         res.status(200).json(slots);
-    } catch (err) {
+    }
+    catch (err) {
         res.status(500).json({
             error: err.message,
         });

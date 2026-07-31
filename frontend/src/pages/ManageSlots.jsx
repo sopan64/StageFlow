@@ -53,7 +53,7 @@ function ManageSlots({ slots, setSlots, handleDeleteSlot, announcements, setAnno
         });
 
         if(!response.ok) {
-            throw new Error("Failed to create slot!");
+            throw new Error("Failed to Create slot!");
         }
 
         const data = await response.json();
