@@ -36,18 +36,15 @@ function App(){
 
   async function handleDeleteSlot(id){
     const slotToDelete = slots.find((slot) => slot._id === id);
-
+    
+    if(!slotToDelete){
+      alert("Slot not found!");
+      return;
+    }
+    
     const newAnnouncement = {
-      id: Date.now(),
       type: "system",
-      message: `Slot "${slotToDelete.title}" has been deleted!`,
-      date: new Date().toLocaleDateString("en-GB", {
-        day: "2-digit",
-        month: "2-digit",
-        year: "numeric",
-        hour: "2-digit",
-        minute: "2-digit"
-      })
+      message: `Slot "${slotToDelete.title}" has been deleted!`
     };
 
     try{
@@ -61,13 +58,27 @@ function App(){
 
       setSlots((prevSlots) => prevSlots.filter((slot) => slot._id !== id));
 
+      const announcementsResponse = await fetch("http://localhost:5000/announcements", {
+        method: "POST",
+        headers:{
+          "content-Type": "application/json"
+        },
+        body: JSON.stringify(newAnnouncement)
+      });
+
+      if(!announcementsResponse.ok){
+        throw new Error("Failed to create announcement!");
+      }
+
+      const announcementsData = await announcementsResponse.json();
+
       setAnnouncements((prevAnnouncements) => [
-        newAnnouncement,
+        announcementsData,
         ...prevAnnouncements
       ]);
     }
     catch (err) {
-      console.log(err);
+      alert(err.message);
     }
 
   }

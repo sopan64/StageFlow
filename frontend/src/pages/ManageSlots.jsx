@@ -19,6 +19,10 @@ function ManageSlots({ slots, setSlots, handleDeleteSlot, announcements, setAnno
             setError("Please fill all fields!");
             return;
         }
+        if(Number(members) < 1){
+            setError("Members should be greater than or equal to 1!");
+            return;
+        }
 
         const newslot = {
             title: name,
@@ -29,20 +33,12 @@ function ManageSlots({ slots, setSlots, handleDeleteSlot, announcements, setAnno
         };
 
         const newAnnouncement = {
-            id: Date.now()+1,
             type: "system",
-            message: `New slot "${name}" has been created!`,
-            date: new Date().toLocaleDateString("en-GB", {
-                day: "2-digit",
-                month: "2-digit",
-                year: "numeric",
-                hour: "2-digit",
-                minute: "2-digit"
-            })
+            message: `New slot "${name}" has been created!`
         };
 
         try {
-        const response = await fetch("http://localhost:5000/slots", {
+        const slotsResponse = await fetch("http://localhost:5000/slots", {
 
             method: "POST",
             headers: {
@@ -52,25 +48,39 @@ function ManageSlots({ slots, setSlots, handleDeleteSlot, announcements, setAnno
             body: JSON.stringify(newslot)
         });
 
-        if(!response.ok) {
+        if(!slotsResponse.ok) {
             throw new Error("Failed to Create slot!");
         }
 
-        const data = await response.json();
+        const slotsData = await slotsResponse.json();
 
-        setSlots((prevSlots) => [...prevSlots, data.slot]);
-
-        setAnnouncements((prevAnnouncements) => [
-            newAnnouncement,
-            ...prevAnnouncements
-        ]);
-        
+        setSlots((prevSlots) => [...prevSlots, slotsData.slot]);
         setName("");
         setCoordinator("");
         setTime("");
         setMembers("");
         setVenue("");
         setError("");
+
+        const announcementsResponse = await fetch("http://localhost:5000/announcements", {
+            method: "POST",
+            headers:{
+                "content-Type": "application/json"
+            },
+            body: JSON.stringify(newAnnouncement)
+        });
+
+        if(!announcementsResponse.ok){
+            throw new Error("Failed to create announcement!");
+        }
+
+        const announcementsData = await announcementsResponse.json();
+
+        setAnnouncements((prevAnnouncements) => [
+            announcementsData,
+            ...prevAnnouncements
+        ]);
+
         navigate("/manage-slots", {replace: true});
         }
         catch (err) {
@@ -107,7 +117,8 @@ function ManageSlots({ slots, setSlots, handleDeleteSlot, announcements, setAnno
             />
 
             <Input 
-                type="text"
+                type="number"
+                min="1"
                 placeholder="Members"
                 value={members}
                 onChange={(e) => setMembers(e.target.value)}

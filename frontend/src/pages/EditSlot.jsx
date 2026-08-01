@@ -30,18 +30,14 @@ function EditSlot({ slots, setSlots, announcements, setAnnouncements }){
             setError("Please fill all fields!");
             return;
         }
+        if(Number(members) < 1){
+            setError("Members should be greater than or equal to 1!");
+            return;
+        }
 
         const newAnnouncement = {
-            id: Date.now(),
             type: "system",
-            message: `Slot "${name}" has been updated!`,
-            date: new Date().toLocaleDateString("en-GB", {
-                day: "2-digit",
-                month: "2-digit",
-                year: "numeric",
-                hour: "2-digit",
-                minute: "2-digit"
-            })
+            message: `Slot "${name}" has been updated!`
         };
 
         const updatedSlot = {
@@ -72,16 +68,31 @@ function EditSlot({ slots, setSlots, announcements, setAnnouncements }){
                 prevSlots.map((slot) => slot._id === id? data.slot : slot)
             );
 
+            const announcementsResponse = await fetch("http://localhost:5000/announcements", {
+                method: "POST",
+                headers:{
+                    "content-Type": "application/json"
+                },
+                body: JSON.stringify(newAnnouncement)
+            });
+
+            if(!announcementsResponse.ok){
+                throw new Error("Failed to create announcement!");
+            }
+
+            const announcementsData = await announcementsResponse.json();
+
             setAnnouncements((prevAnnouncements) => [
-                newAnnouncement,
+                announcementsData,
                 ...prevAnnouncements
             ]);
 
+            setError("");
             navigate("/manage-slots", {replace: true});
 
         } 
         catch (err) {
-            console.log(err);
+            setError(err.message);
         }
     }
 
@@ -114,7 +125,8 @@ function EditSlot({ slots, setSlots, announcements, setAnnouncements }){
             />
 
             <Input 
-                type="text"
+                type="number"
+                min="1"
                 placeholder="Members"
                 value={members}
                 onChange={(e) => setMembers(e.target.value)}

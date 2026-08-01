@@ -18,7 +18,6 @@ function EventCard({event}){
             <p><strong>Date:</strong> {formattedDate}</p>
             <p><strong>Venue:</strong> {event.venue}</p>
             <p><strong>{daysLeft}</strong> Days Left</p>
-            
         </div>
     );
 }
