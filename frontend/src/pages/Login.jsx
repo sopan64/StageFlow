@@ -2,29 +2,27 @@ import { useState } from "react";
 import Button from "../components/Button";
 import "../styles/Login.css";
 import Input from "../components/Input";
-import { useNavigate } from "react-router-dom";
+import { replace, useNavigate } from "react-router-dom";
 
 function Login() {
-    const [username, setUsername] = useState("");
+    const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
-    const [loggedInUser, setLoggedInUser] = useState("");
+    const [error, setError] = useState("");
 
     const navigate = useNavigate();
 
     function handleLogin(){
 
-        if(username === "" || password === ""){
-            alert("Please fill all the fields!");
+        if(!email || !password){
+            setError("Please fill all the fields!");
             return;
         }
-        setLoggedInUser(username);
 
-        setUsername("");
+        setEmail("");
         setPassword("");
+        setError("");
 
-        setIsLoggedIn(true);
-        navigate("/dashboard");
+        navigate("/dashboard", {replace: true});
     }
 
     return (
@@ -35,12 +33,14 @@ function Login() {
                 <h1>StageFlow</h1>
 
                 <p>Club Event Management</p>
-
+                {
+                    error && <p className="error">{error}</p>
+                }
                 <Input 
                     type="text"
-                    placeholder="Username"
-                    value={username}
-                    onChange={(e) => setUsername(e.target.value)}
+                    placeholder="e-mail"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
                 />
 
                 <Input 
@@ -54,7 +54,12 @@ function Login() {
                     text="Sign In"
                     onClick={handleLogin}
                 />
-                <Button text="Register" />
+
+                <p>Don't have an account?</p>
+                <Button
+                    text="Create account"
+                    onClick={() => navigate("/register")}
+                />
 
             </div>
 

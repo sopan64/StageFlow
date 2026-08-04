@@ -1,9 +1,12 @@
 require("dotenv").config();
 
 const express = require("express");
+
 const slotsRouter = require("./routes/slots");
 const announcementsRouter = require("./routes/announcements");
 const eventRouter = require("./routes/event");
+const userRouter = require("./routes/users");
+
 const cors = require("cors");
 
 const app = express();
@@ -34,6 +37,8 @@ app.use("/slots", slotsRouter);
 app.use("/announcements", announcementsRouter);
 
 app.use("/event", eventRouter);
+
+app.use("/users", userRouter);
 
 app.listen(5000, () => {
     console.log("Server is running on port 5000");

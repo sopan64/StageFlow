@@ -15,7 +15,7 @@ router.get("/", async (req, res) => {
             error: err.message,
         });
     }
-});
+}); 
 
 router.post("/", async (req, res) => {
     try {

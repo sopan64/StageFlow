@@ -11,6 +11,7 @@ import EditSlot from "./pages/EditSlot";
 import ManageAnnouncements from "./pages/ManageAnnouncements";
 import ManageEvent from "./pages/ManageEvent";
 import initialevent from "./data/events";
+import Register from "./pages/Register";
 
 function App(){
 
@@ -88,6 +89,7 @@ function App(){
       <Routes>
 
         <Route path="/" element={<Login />} />
+        <Route path="/register" element={<Register />} />
         <Route element={<MainLayout />} >
 
           <Route path="/manage-slots" element={<ManageSlots slots={slots} setSlots={setSlots} handleDeleteSlot={handleDeleteSlot}

@@ -15,7 +15,7 @@ function EventCard({event}){
         <div className="event-card">
             <h2>Current Event</h2>
             <h3>{event.name}</h3>
-            <p><strong>Date:</strong> {formattedDate}</p>
+            <p><strong>Event Date:</strong> {formattedDate}</p>
             <p><strong>Venue:</strong> {event.venue}</p>
             <p><strong>{daysLeft}</strong> Days Left</p>
         </div>
