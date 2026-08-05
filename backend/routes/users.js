@@ -5,6 +5,7 @@ const express = require("express");
 const router = express.Router();
 
 const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
 
 router.post("/register", async(req, res) => {
     try{
@@ -26,7 +27,7 @@ router.post("/register", async(req, res) => {
 
         const createdUser = await User.create(newUser);
 
-        res.json(createdUser);
+        res.status(201).json(createdUser);
     }
     catch (err) {
         res.status(400).json({
@@ -37,28 +38,43 @@ router.post("/register", async(req, res) => {
 
 router.post("/login", async(req, res) => {
     try{
-        const isExisting = await User.findOne({email: req.body.email});
+        const user = await User.findOne({email: req.body.email});
 
-        if(!isExisting){
-            return res.status(404).json({
+        if(!user){
+            return res.status(401).json({
                 message: "Invalid email or password!"
             });
         }
         
-        const isMatch = await bcrypt.compare(req.body.password, isExisting.password);
+        const isMatch = await bcrypt.compare(req.body.password, user.password);
 
         if(!isMatch){
-            return res.status(404).json({
+            return res.status(401).json({
                 message: "Invalid email or password!"
             });
         }
+
+        const token = jwt.sign(
+            {
+                id: user._id,
+                role: user.role
+            },
+            process.env.JWT_SECRET,
+            {
+                expiresIn: "7d"
+            }
+        );
+
         const userData = {
-            name: isExisting.name,
-            email: isExisting.email,
-            role: isExisting.role
+            name: user.name,
+            email: user.email,
+            role: user.role
         }
 
-        res.status(201).json(userData);
+        res.status(200).json({
+            token,
+            user: userData
+        });
     }
     catch (err) {
         res.status(400).json({
@@ -66,7 +82,5 @@ router.post("/login", async(req, res) => {
         });
     }
 });
-
-
 
 module.exports = router;

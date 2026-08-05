@@ -12,6 +12,7 @@ import ManageAnnouncements from "./pages/ManageAnnouncements";
 import ManageEvent from "./pages/ManageEvent";
 import initialevent from "./data/events";
 import Register from "./pages/Register";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 function App(){
 
@@ -90,18 +91,19 @@ function App(){
 
         <Route path="/" element={<Login />} />
         <Route path="/register" element={<Register />} />
-        <Route element={<MainLayout />} >
 
-          <Route path="/manage-slots" element={<ManageSlots slots={slots} setSlots={setSlots} handleDeleteSlot={handleDeleteSlot}
+        <Route element={<ProtectedRoute />} >
+          <Route element={<MainLayout />} >
+            <Route path="/manage-slots" element={<ManageSlots slots={slots} setSlots={setSlots} handleDeleteSlot={handleDeleteSlot}
             announcements={announcements} setAnnouncements={setAnnouncements}/>} />
-          <Route path="/dashboard" element={<Dashboard slots={slots} event={event} />} />
-          <Route path="/attendance" element={<Attendance />} />
-          <Route path="/announcements" element={<Announcements announcements={announcements} />} />
-          <Route path="/manage-announcements" element={<ManageAnnouncements announcements={announcements} setAnnouncements={setAnnouncements}/>} />
-          <Route path="/slotdetails/:id" element={<SlotDetails slots={slots} />} />
-          <Route path="/edit-slot/:id" element={<EditSlot slots={slots} setSlots={setSlots} announcements={announcements} setAnnouncements={setAnnouncements}/>} />
-          <Route path="/manage-event" element={<ManageEvent event={event} setEvent={setEvent}/>} />
-
+            <Route path="/dashboard" element={<Dashboard slots={slots} event={event} />} />
+            <Route path="/attendance" element={<Attendance />} />
+            <Route path="/announcements" element={<Announcements announcements={announcements} />} />
+            <Route path="/manage-announcements" element={<ManageAnnouncements announcements={announcements} setAnnouncements={setAnnouncements}/>} />
+            <Route path="/slotdetails/:id" element={<SlotDetails slots={slots} />} />
+            <Route path="/edit-slot/:id" element={<EditSlot slots={slots} setSlots={setSlots} announcements={announcements} setAnnouncements={setAnnouncements}/>} />
+            <Route path="/manage-event" element={<ManageEvent event={event} setEvent={setEvent}/>} />
+          </Route>
         </Route>
 
       </Routes>
