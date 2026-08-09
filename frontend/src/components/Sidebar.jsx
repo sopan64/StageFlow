@@ -16,11 +16,12 @@ function Sidebar(){
         <div className="sidebar">
 
             <NavLink to="/dashboard">Dashboard</NavLink>
-            <NavLink to="/manage-slots">Manage Slots</NavLink>
             <NavLink to="/attendance">Attendance</NavLink>
             <NavLink to="/announcements">Announcements</NavLink>
+            <NavLink to="/manage-slots">Manage Slots</NavLink>
             <NavLink to="/manage-announcements">Manage Announcements</NavLink>
             <NavLink to="/manage-event">Manage Event</ NavLink>
+            <NavLink to="manage-users">Manage Users</NavLink>
             <Button 
                 text="Logout"
                 onClick={() => {

@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import Input from "../components/Input";
 import Button from "../components/Button";
 import "../styles/ManageSlots.css";
+import AdminOnlyOverlay from "../components/AdminOnlyOverlay";
 
 function ManageSlots({ slots, setSlots, handleDeleteSlot, announcements, setAnnouncements }){
     const [error, setError] = useState("");
@@ -38,21 +39,23 @@ function ManageSlots({ slots, setSlots, handleDeleteSlot, announcements, setAnno
         };
 
         try {
+        const token = localStorage.getItem("token");    
         const slotsResponse = await fetch("http://localhost:5000/slots", {
 
             method: "POST",
             headers: {
-                "Content-Type": "application/json"
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${token}`
             },
 
             body: JSON.stringify(newslot)
         });
 
-        if(!slotsResponse.ok) {
-            throw new Error("Failed to Create slot!");
-        }
-
         const slotsData = await slotsResponse.json();
+
+        if(!slotsResponse.ok) {
+            throw new Error(slotsData.message || "Failed to Create slot!");
+        }
 
         setSlots((prevSlots) => [...prevSlots, slotsData.slot]);
         setName("");
@@ -65,16 +68,18 @@ function ManageSlots({ slots, setSlots, handleDeleteSlot, announcements, setAnno
         const announcementsResponse = await fetch("http://localhost:5000/announcements", {
             method: "POST",
             headers:{
-                "content-Type": "application/json"
+                "content-Type": "application/json",
+                "Authorization": `Bearer ${token}`
             },
             body: JSON.stringify(newAnnouncement)
         });
 
-        if(!announcementsResponse.ok){
-            throw new Error("Failed to create announcement!");
-        }
-
         const announcementsData = await announcementsResponse.json();
+        if(!announcementsResponse.ok){
+            throw new Error(
+                announcementsData.message || "Failed to create announcement!"
+            );
+        }
 
         setAnnouncements((prevAnnouncements) => [
             announcementsData,
@@ -89,6 +94,7 @@ function ManageSlots({ slots, setSlots, handleDeleteSlot, announcements, setAnno
     }
 
     return (
+        <AdminOnlyOverlay>
         <div className="admin-page">
             <h1>Manage Slots</h1>
 
@@ -169,6 +175,7 @@ function ManageSlots({ slots, setSlots, handleDeleteSlot, announcements, setAnno
             }
 
         </div>
+        </AdminOnlyOverlay>
     );
 }
 

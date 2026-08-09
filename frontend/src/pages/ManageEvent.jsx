@@ -1,28 +1,83 @@
 import { useState } from "react";
 import Input from "../components/Input";
 import Button from "../components/Button";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import "../styles/ManageEvent.css";
+import AdminOnlyOverlay from "../components/AdminOnlyOverlay";
 
-function ManageEvent({event, setEvent}) {
-    const [name, setName] = useState(event.name);
-    const [date, setDate] = useState(event.date);
-    const [venue, setVenue] = useState(event.venue);
+function ManageEvent({event, setEvent, announcements, setAnnouncements}) {
+    const currentEvent = event[0];
+    const [name, setName] = useState(currentEvent.name);
+    const [date, setDate] = useState(currentEvent.date.split("T")[0]);
+    const [venue, setVenue] = useState(currentEvent.venue);
+    const [error, setError] = useState("");
     const navigate = useNavigate();
 
-    function handleSaveChanges(){
-        setEvent({
-            name,
-            date,
-            venue
-        });
+    async function handleSaveChanges(){
 
-        navigate("/dashboard", {replace: true});
+        if(!name || !date || !venue){
+            setError("Please fill all the fields!");
+            return;
+        }
+        const updatedEvent = {
+            name, date, venue
+        };
+
+        const newAnnouncement = {
+            type: "system",
+            message: "Event details has been changed!"
+        };
+
+        try{
+            const token = localStorage.getItem("token");
+            const eventResponse = await fetch(`http://localhost:5000/event/${currentEvent._id}`, {
+                method: "PUT",
+                headers:{
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${token}`
+                },
+                body: JSON.stringify(updatedEvent)
+            });
+
+            const eventData = await eventResponse.json();
+            if(!eventResponse.ok){
+                throw new Error(eventData.message || "Faild to edit event!");
+            }
+            setEvent([eventData]);
+
+            const announcementResponse = await fetch("http://localhost:5000/announcements", {
+                method: "POST",
+                headers:{
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${token}`
+                },
+                body: JSON.stringify(newAnnouncement)
+            });
+
+            const announcementData = await announcementResponse.json();
+            if(!announcementResponse.ok){
+                throw new Error(announcementData.message || "Failed to add announcement!");
+            }
+
+            setAnnouncements((prevAnnouncements) => [
+                announcementData,
+                ...prevAnnouncements
+            ]);
+
+            navigate("/dashboard", {replace: true});
+        }
+        catch (err){
+            setError(err.message);
+        }
     }
 
     return (
+        <AdminOnlyOverlay>
         <div className="manage-event">
             <h2>Manage Event</h2>
+            {
+                error && <p className="error">{error}</p>
+            }
             <Input 
                 type="text"
                 placeholder="Event Name"
@@ -46,6 +101,7 @@ function ManageEvent({event, setEvent}) {
                 onClick={handleSaveChanges}
             />
         </div>
+        </AdminOnlyOverlay>
     );
 }
 

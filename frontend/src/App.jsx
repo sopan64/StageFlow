@@ -10,26 +10,66 @@ import ManageSlots from "./pages/ManageSlots";
 import EditSlot from "./pages/EditSlot";
 import ManageAnnouncements from "./pages/ManageAnnouncements";
 import ManageEvent from "./pages/ManageEvent";
-import initialevent from "./data/events";
 import Register from "./pages/Register";
 import ProtectedRoute from "./components/ProtectedRoute";
+import ManageUsers from "./pages/ManageUsers";
 
 function App(){
 
   const [slots, setSlots] = useState([]);
   const [announcements, setAnnouncements] = useState([]);
-  const [event, setEvent] = useState(initialevent);
+  const [event, setEvent] = useState([]);
+  const [users, setUsers] = useState([]);
 
   useEffect(() => {
     async function fetchInitialDetails(){
+      try{
+      const token = localStorage.getItem("token");
 
-      const slotsResponse = await fetch("http://localhost:5000/slots");
-      const announcementsResponse = await fetch("http://localhost:5000/announcements");
+      const [eventResponse, slotsResponse, announcementsResponse, usersRespponse] =
+        await Promise.all([
+          fetch("http://localhost:5000/event", {
+            headers: {
+              "Authorization": `Bearer ${token}`
+            }
+          }),
+
+          fetch("http://localhost:5000/slots", {
+            headers: {
+              "Authorization": `Bearer ${token}`
+            }
+          }),
+
+          fetch("http://localhost:5000/announcements", {
+            headers: {
+              "Authorization": `Bearer ${token}`
+            }
+          }),
+
+          fetch("http://localhost:5000/users", {
+            headers: {
+              "Authorization": `Bearer ${token}`
+            }
+          })
+        ]);
+      
+      if (!eventResponse.ok || !slotsResponse.ok || !announcementsResponse.ok || !usersRespponse) {
+        throw new Error("Failed to fetch initial details!");
+      }
+
+      const eventData = await eventResponse.json();
       const slotsData = await slotsResponse.json();
       const announcementsData = await announcementsResponse.json();
+      const usersData = await usersRespponse.json();
 
+      setEvent(eventData);
       setSlots(slotsData);
-      setAnnouncements(announcementsData)
+      setAnnouncements(announcementsData);
+      setUsers(usersData);
+      }
+      catch (err) {
+        alert(err.message);
+      }
     }
 
     fetchInitialDetails();
@@ -50,12 +90,17 @@ function App(){
     };
 
     try{
+      const token = localStorage.getItem("token");
       const response = await fetch(`http://localhost:5000/slots/${id}`, {
-        method: "DELETE"
+        method: "DELETE",
+        headers: {
+          "Authorization": `Bearer ${token}`
+        }
       });
-
+      
+      const data = await response.json();
       if(!response.ok){
-        throw new Error("Failed to Delete the slot");
+        throw new Error(data.message || "Failed to Delete the slot");
       }
 
       setSlots((prevSlots) => prevSlots.filter((slot) => slot._id !== id));
@@ -63,16 +108,18 @@ function App(){
       const announcementsResponse = await fetch("http://localhost:5000/announcements", {
         method: "POST",
         headers:{
-          "content-Type": "application/json"
+          "content-Type": "application/json",
+          "Authorization": `Bearer ${token}`
         },
         body: JSON.stringify(newAnnouncement)
       });
 
-      if(!announcementsResponse.ok){
-        throw new Error("Failed to create announcement!");
-      }
-
       const announcementsData = await announcementsResponse.json();
+      if(!announcementsResponse.ok){
+        throw new Error(
+          announcementsData.message || "Failed to create announcement!"
+        );
+      }
 
       setAnnouncements((prevAnnouncements) => [
         announcementsData,
@@ -102,7 +149,13 @@ function App(){
             <Route path="/manage-announcements" element={<ManageAnnouncements announcements={announcements} setAnnouncements={setAnnouncements}/>} />
             <Route path="/slotdetails/:id" element={<SlotDetails slots={slots} />} />
             <Route path="/edit-slot/:id" element={<EditSlot slots={slots} setSlots={setSlots} announcements={announcements} setAnnouncements={setAnnouncements}/>} />
-            <Route path="/manage-event" element={<ManageEvent event={event} setEvent={setEvent}/>} />
+            <Route path="/manage-users" element={<ManageUsers users={users} setUsers={setUsers}/>} />
+            <Route path="/manage-event" 
+              element={ event.length > 0 
+                ? <ManageEvent event={event} setEvent={setEvent} announcements={announcements} setAnnouncements={setAnnouncements}/>
+                : <p>Loading event...</p>
+              } 
+            />
           </Route>
         </Route>
 

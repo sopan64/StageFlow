@@ -1,6 +1,6 @@
 import Input from "../components/Input";
 import Button from "../components/Button";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { replace, useNavigate } from "react-router-dom";
 import "../styles/Register.css";
 
@@ -11,6 +11,14 @@ function Register() {
     const [confirmPassword, setConfirmPassword] = useState("");
     const [error, setError] = useState("");
     const navigate = useNavigate();
+
+    useEffect(() => {
+        const token = localStorage.getItem("token");
+    
+        if(token){
+            navigate("/dashboard", {replace: true});
+        }
+    }, []);
 
     async function handleRegister(){
         

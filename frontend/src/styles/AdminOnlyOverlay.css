@@ -1,0 +1,37 @@
+.admin-page {
+    position: relative;
+    width: 100%;
+}
+
+.blurred-content {
+    filter: blur(2px);
+    pointer-events: none;
+    user-select: none;
+}
+
+.admin-overlay {
+    position: absolute;
+    inset: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    z-index: 10;
+
+    background: transparent;
+}
+
+.admin-message {
+    text-align: center;
+    padding: 18px 28px;
+    border-radius: 12px;
+}
+
+.admin-message h2 {
+    margin: 0 0 8px;
+}
+
+.admin-message p {
+    margin: 0;
+}

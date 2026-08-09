@@ -11,6 +11,14 @@ function Login() {
     const location = useLocation();
     const navigate = useNavigate();
 
+    useEffect(() => {
+        const token = localStorage.getItem("token");
+
+        if(token){
+            navigate("/dashboard", {replace: true});
+        }
+    }, []);
+
     async function handleLogin(){
 
         if(!email || !password){

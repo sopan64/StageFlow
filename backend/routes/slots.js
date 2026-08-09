@@ -1,10 +1,12 @@
 const Slot = require("../models/Slot");
+const auth = require("../middleware/auth");
+const admin = require("../middleware/admin");
 
 const express = require("express");
 
 const router = express.Router();
 
-router.get("/", async (req, res) => {
+router.get("/", auth, async (req, res) => {
     try{
         const slots = await Slot.find();
 
@@ -12,12 +14,12 @@ router.get("/", async (req, res) => {
     }
     catch (err) {
         res.status(500).json({
-            error: err.message,
+            error: err.message
         });
     }
-}); 
+});
 
-router.post("/", async (req, res) => {
+router.post("/", auth, admin, async (req, res) => {
     try {
         const newSlot = await Slot.create(req.body);
 
@@ -27,12 +29,12 @@ router.post("/", async (req, res) => {
         });
     } catch (err) {
         res.status(400).json({
-            error: err.message,
+            error: err.message
         });
     }
 });
 
-router.put("/:id", async (req, res) => {
+router.put("/:id", auth, admin, async (req, res) => {
     try {
         const updatedSlot = await Slot.findByIdAndUpdate(
             req.params.id,
@@ -57,7 +59,7 @@ router.put("/:id", async (req, res) => {
     }
 });
 
-router.delete("/:id", async (req, res) => {
+router.delete("/:id", auth, admin, async (req, res) => {
     try {
 
         const deletedSlot = await Slot.findByIdAndDelete(req.params.id);

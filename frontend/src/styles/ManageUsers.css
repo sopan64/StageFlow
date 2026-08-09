@@ -1,0 +1,30 @@
+.manage-users {
+    width: 350px;
+    margin: 30px auto;
+}
+
+.manage-users h2 {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.user-item {
+    background: white;
+    padding: 18px 24px;
+    margin-bottom: 12px;
+    border-radius: 10px;
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.08);
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.user-info h3 {
+    margin: 0 0 5px;
+}
+
+.user-info p {
+    margin: 0;
+    color: #666;
+}

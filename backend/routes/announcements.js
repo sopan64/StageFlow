@@ -1,10 +1,12 @@
+const admin = require("../middleware/admin");
+const auth = require("../middleware/auth");
 const Announcement = require("../models/Announcement");
 
 const express = require("express");
 
 const router = express.Router();
 
-router.get("/", async (req, res) => {
+router.get("/", auth, async (req, res) => {
     try{
         const announcements = await Announcement.find().sort({ createdAt: -1 });
 
@@ -17,7 +19,7 @@ router.get("/", async (req, res) => {
     }
 });
 
-router.post("/", async (req, res) => {
+router.post("/", auth, admin, async (req, res) => {
     try{
         const newAnnouncement = await Announcement.create(req.body);
 
@@ -30,7 +32,7 @@ router.post("/", async (req, res) => {
     }
 });
 
-router.delete("/:id", async (req, res) => {
+router.delete("/:id", auth, admin, async (req, res) => {
     try{
         const deletedAnnouncement = await Announcement.findByIdAndDelete(req.params.id);
 

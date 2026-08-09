@@ -49,20 +49,21 @@ function EditSlot({ slots, setSlots, announcements, setAnnouncements }){
         };
         
         try{
+            const token = localStorage.getItem("token");
             const response = await fetch(`http://localhost:5000/slots/${id}`, {
                 method: "PUT",
                 headers: {
-                    "content-Type": "application/json"
+                    "content-Type": "application/json",
+                    "Authorization": `Bearer ${token}`
                 },
 
                 body: JSON.stringify(updatedSlot)
             });
 
-            if(!response.ok){
-                throw new Error("Faild to edit slot!");
-            }
-
             const data = await response.json();
+            if(!response.ok){
+                throw new Error(data.message || "Faild to edit slot!");
+            }
 
             setSlots((prevSlots) => 
                 prevSlots.map((slot) => slot._id === id? data.slot : slot)
@@ -71,16 +72,18 @@ function EditSlot({ slots, setSlots, announcements, setAnnouncements }){
             const announcementsResponse = await fetch("http://localhost:5000/announcements", {
                 method: "POST",
                 headers:{
-                    "content-Type": "application/json"
+                    "content-Type": "application/json",
+                    "Authorization": `Bearer ${token}`
                 },
                 body: JSON.stringify(newAnnouncement)
             });
 
-            if(!announcementsResponse.ok){
-                throw new Error("Failed to create announcement!");
-            }
-
             const announcementsData = await announcementsResponse.json();
+            if(!announcementsResponse.ok){
+                throw new Error(
+                    announcementsData.message || "Failed to create announcement!"
+                );
+            }
 
             setAnnouncements((prevAnnouncements) => [
                 announcementsData,

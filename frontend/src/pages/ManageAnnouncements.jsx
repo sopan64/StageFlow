@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Button from "../components/Button";
-
 import "../styles/ManageAnnouncements.css";
+import AdminOnlyOverlay from "../components/AdminOnlyOverlay";
 
 function ManageAnnouncements({ announcements, setAnnouncements }) {
     const [message, setMessage] = useState("");
@@ -19,10 +19,12 @@ function ManageAnnouncements({ announcements, setAnnouncements }) {
         };
 
         try{
+            const token = localStorage.getItem("token");
             const response = await fetch("http://localhost:5000/announcements", {
                 method: "POST",
                 headers: {
-                    "content-Type": "application/json"
+                    "content-Type": "application/json",
+                    "Authorization": `Bearer ${token}`
                 },
                 body: JSON.stringify(newAnnouncement)
             });
@@ -43,8 +45,12 @@ function ManageAnnouncements({ announcements, setAnnouncements }) {
 
     async function handleDeleteAnnouncement(id) {
         try {
+            const token = localStorage.getItem("token");
             const response = await fetch(`http://localhost:5000/announcements/${id}`, {
-                method: "DELETE"
+                method: "DELETE",
+                headers: {
+                    "Authorization": `Bearer ${token}`
+                }
             });
 
             if(!response.ok){
@@ -61,6 +67,7 @@ function ManageAnnouncements({ announcements, setAnnouncements }) {
     }
 
     return (
+        <AdminOnlyOverlay>
         <div className="manage-announcements">
             <h2>Manage Announcements</h2>
 
@@ -80,41 +87,37 @@ function ManageAnnouncements({ announcements, setAnnouncements }) {
             <hr />
             <h3>Existing Announcements</h3>
 
-            {announcements.map((announcement) => (
-                <div 
-                    key={announcement._id}
-                    className="announcement-item"
-                >
-                    <p>
-                        {announcement.type === "admin"
-                            ? "📢 Admin"
-                            : "🔔 System"
-                        }
-                    </p>
+            {announcements
+                .filter((announcement) => announcement.type === "admin")
+                .map((announcement) => (
+                    <div
+                        key={announcement._id}
+                        className="announcement-item"
+                    >
+                        <p>📢 Admin</p>
 
-                    <p>{announcement.message}</p>
-                    <p className="announcement-date">
-                        {new Date(announcement.createdAt).toLocaleDateString("en-GB", {
-                            day: "2-digit",
-                            month: "2-digit",
-                            year: "numeric",
-                            hour: "2-digit",
-                            minute: "2-digit"
-                        })}
-                    </p>
-                    {
-                        announcement.type === "admin" && (
-                            <div className="announcement-actions">
-                                <Button
-                                    text="Delete"
-                                    onClick={() => handleDeleteAnnouncement(announcement._id)}
-                                />
-                            </div>
-                        )
-                    }
-                </div>
+                        <p>{announcement.message}</p>
+
+                        <p className="announcement-date">
+                            {new Date(announcement.createdAt).toLocaleDateString("en-GB", {
+                                day: "2-digit",
+                                month: "2-digit",
+                                year: "numeric",
+                                hour: "2-digit",
+                                minute: "2-digit"
+                            })}
+                        </p>
+
+                        <div className="announcement-actions">
+                            <Button
+                                text="Delete"
+                                onClick={() => handleDeleteAnnouncement(announcement._id)}
+                            />
+                        </div>
+                    </div>
             ))}
         </div>
+        </AdminOnlyOverlay>
     );
 }
 
