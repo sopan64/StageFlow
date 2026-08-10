@@ -8,7 +8,7 @@ function ManageUsers({ users, setUsers }) {
     async function handleRole(id, role){
         try{
             const token = localStorage.getItem("token");
-            const response = await fetch(`http://localhost:5000/users/${id}/manage-role`, {
+            const response = await fetch(`${import.meta.env.VITE_API_URL}/users/${id}/manage-role`, {
                 method: "PUT",
                 headers: {
                     "Authorization": `Bearer ${token}`

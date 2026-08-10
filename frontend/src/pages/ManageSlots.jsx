@@ -40,7 +40,7 @@ function ManageSlots({ slots, setSlots, handleDeleteSlot, announcements, setAnno
 
         try {
         const token = localStorage.getItem("token");    
-        const slotsResponse = await fetch("http://localhost:5000/slots", {
+        const slotsResponse = await fetch(`${import.meta.env.VITE_API_URL}/slots`, {
 
             method: "POST",
             headers: {
@@ -65,7 +65,7 @@ function ManageSlots({ slots, setSlots, handleDeleteSlot, announcements, setAnno
         setVenue("");
         setError("");
 
-        const announcementsResponse = await fetch("http://localhost:5000/announcements", {
+        const announcementsResponse = await fetch(`${import.meta.env.VITE_API_URL}/announcements`, {
             method: "POST",
             headers:{
                 "content-Type": "application/json",

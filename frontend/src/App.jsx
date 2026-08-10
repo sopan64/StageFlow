@@ -28,25 +28,25 @@ function App(){
 
       const [eventResponse, slotsResponse, announcementsResponse, usersRespponse] =
         await Promise.all([
-          fetch("http://localhost:5000/event", {
+          fetch(`${import.meta.env.VITE_API_URL}/event`, {
             headers: {
               "Authorization": `Bearer ${token}`
             }
           }),
 
-          fetch("http://localhost:5000/slots", {
+          fetch(`${import.meta.env.VITE_API_URL}/slots`, {
             headers: {
               "Authorization": `Bearer ${token}`
             }
           }),
 
-          fetch("http://localhost:5000/announcements", {
+          fetch(`${import.meta.env.VITE_API_URL}/announcements`, {
             headers: {
               "Authorization": `Bearer ${token}`
             }
           }),
 
-          fetch("http://localhost:5000/users", {
+          fetch(`${import.meta.env.VITE_API_URL}/users`, {
             headers: {
               "Authorization": `Bearer ${token}`
             }
@@ -91,7 +91,7 @@ function App(){
 
     try{
       const token = localStorage.getItem("token");
-      const response = await fetch(`http://localhost:5000/slots/${id}`, {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/slots/${id}`, {
         method: "DELETE",
         headers: {
           "Authorization": `Bearer ${token}`
@@ -105,7 +105,7 @@ function App(){
 
       setSlots((prevSlots) => prevSlots.filter((slot) => slot._id !== id));
 
-      const announcementsResponse = await fetch("http://localhost:5000/announcements", {
+      const announcementsResponse = await fetch(`${import.meta.env.VITE_API_URL}/announcements`, {
         method: "POST",
         headers:{
           "content-Type": "application/json",

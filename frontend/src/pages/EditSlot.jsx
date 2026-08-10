@@ -50,7 +50,7 @@ function EditSlot({ slots, setSlots, announcements, setAnnouncements }){
         
         try{
             const token = localStorage.getItem("token");
-            const response = await fetch(`http://localhost:5000/slots/${id}`, {
+            const response = await fetch(`${import.meta.env.VITE_API_URL}/slots/${id}`, {
                 method: "PUT",
                 headers: {
                     "content-Type": "application/json",
@@ -69,7 +69,7 @@ function EditSlot({ slots, setSlots, announcements, setAnnouncements }){
                 prevSlots.map((slot) => slot._id === id? data.slot : slot)
             );
 
-            const announcementsResponse = await fetch("http://localhost:5000/announcements", {
+            const announcementsResponse = await fetch(`${import.meta.env.VITE_API_URL}/announcements`, {
                 method: "POST",
                 headers:{
                     "content-Type": "application/json",

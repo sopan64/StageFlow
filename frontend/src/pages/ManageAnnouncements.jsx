@@ -22,7 +22,7 @@ function ManageAnnouncements({ announcements, setAnnouncements }) {
             const token = localStorage.getItem("token");
 
             const response = await fetch(
-                "http://localhost:5000/announcements",
+                `${import.meta.env.VITE_API_URL}/announcements`,
                 {
                     method: "POST",
                     headers: {
@@ -56,7 +56,7 @@ function ManageAnnouncements({ announcements, setAnnouncements }) {
             const token = localStorage.getItem("token");
 
             const response = await fetch(
-                `http://localhost:5000/announcements/${id}`,
+                `${import.meta.env.VITE_API_URL}/announcements/${id}`,
                 {
                     method: "DELETE",
                     headers: {

@@ -30,7 +30,7 @@ function ManageEvent({event, setEvent, announcements, setAnnouncements}) {
 
         try{
             const token = localStorage.getItem("token");
-            const eventResponse = await fetch(`http://localhost:5000/event/${currentEvent._id}`, {
+            const eventResponse = await fetch(`${import.meta.env.VITE_API_URL}/event/${currentEvent._id}`, {
                 method: "PUT",
                 headers:{
                     "Content-Type": "application/json",
@@ -45,7 +45,7 @@ function ManageEvent({event, setEvent, announcements, setAnnouncements}) {
             }
             setEvent([eventData]);
 
-            const announcementResponse = await fetch("http://localhost:5000/announcements", {
+            const announcementResponse = await fetch(`${import.meta.env.VITE_API_URL}/announcements`, {
                 method: "POST",
                 headers:{
                     "Content-Type": "application/json",
