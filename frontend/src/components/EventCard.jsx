@@ -7,7 +7,9 @@ function EventCard({ event }) {
             <h2>Current Event</h2>
 
             <div className="event-container">
-                {event.map((currentEvent) => {
+                {event.length === 0 ? (
+                    <p className="empty-message">No events yet...</p>
+                ):(event.map((currentEvent) => {
 
                     const today = new Date();
                     const eventDate = new Date(currentEvent.date);
@@ -47,7 +49,7 @@ function EventCard({ event }) {
                             </p>
                         </div>
                     );
-                })}
+                }))}
             </div>
         </div>
     );

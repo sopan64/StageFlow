@@ -145,8 +145,9 @@ function ManageSlots({ slots, setSlots, handleDeleteSlot, announcements, setAnno
             <hr />
             <h2>All Slots</h2>
 
-            {
-                slots.map((slot) => (
+            {slots.length === 0 ? (
+                <p className="empty-message">No slots yet...</p>
+                ):(slots.map((slot) => (
                     <div key={slot._id}>
                         <p
                             onClick={() => navigate(`/slotdetails/${slot._id}`)}
@@ -172,7 +173,7 @@ function ManageSlots({ slots, setSlots, handleDeleteSlot, announcements, setAnno
                         </div>
                     </div>
                 ))
-            }
+            )}
 
         </div>
         </AdminOnlyOverlay>

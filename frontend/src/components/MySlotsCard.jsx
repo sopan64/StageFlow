@@ -8,8 +8,9 @@ function MySlotsCard({ slots }){
     return (
         <div className="myslots-card">
             <h2>My Slots</h2>
-            {
-                slots.map((slot) => (
+            {slots.length === 0 ? (
+                <p className="empty-message">No slots yet...</p>
+                ):(slots.map((slot) => (
                     <div
                         key={slot._id}
                         className="slot-item"
@@ -23,7 +24,7 @@ function MySlotsCard({ slots }){
 
                     </div>
                 ))
-            }
+            )}
         </div>
     );
 }

@@ -1,0 +1,48 @@
+[{
+  "_id": {
+    "$oid": "6a732522317eae9f6af9b290"
+  },
+  "name": "Sopan member",
+  "email": "sopan@2001",
+  "password": "$2b$10$4Pr9EFwTKuOhFtQM/eyFpeB1u1q0C/2gX.ZsW5N.2/lqIWcRuX8L6",
+  "role": "member",
+  "createdAt": {
+    "$date": "2026-08-05T11:57:22.781Z"
+  },
+  "updatedAt": {
+    "$date": "2026-08-09T16:55:03.529Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6a732d6e317eae9f6af9b293"
+  },
+  "name": "Sopan Avdhutwar",
+  "email": "sopan@2002",
+  "password": "$2b$10$H4LHmADU237Hdsq6I581VOOU0RxHF9b6cv5vqy4FE7fq8nYAXtoCW",
+  "role": "admin",
+  "createdAt": {
+    "$date": "2026-08-05T12:32:46.787Z"
+  },
+  "updatedAt": {
+    "$date": "2026-08-09T15:29:54.729Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6a78b913a72f5649b2e71d5c"
+  },
+  "name": "meow meow",
+  "email": "meow@123",
+  "password": "$2b$10$81qADD0rtXlERP9fdtYbHO2MPEb5l.B0L5lFKWsDMzTiC.T83Vd7K",
+  "role": "member",
+  "createdAt": {
+    "$date": "2026-08-09T17:29:55.035Z"
+  },
+  "updatedAt": {
+    "$date": "2026-08-09T17:29:55.035Z"
+  },
+  "__v": 0
+}]

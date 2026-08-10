@@ -34,7 +34,9 @@ function ManageUsers({ users, setUsers }) {
             <div className="manage-users">
                 <h2>Manage Users</h2>
 
-                {users.map((user) => (
+                {users.length ===  0 ? (
+                    <p className="empty-message">No users yet...</p>
+                ) : (users.map((user) => (
                     <div key={user._id} className="user-item">
 
                         <div className="user-info">
@@ -50,7 +52,7 @@ function ManageUsers({ users, setUsers }) {
                             onClick={() => handleRole(user._id, user.role)}
                         />
                     </div>
-                ))}
+                )))}
             </div>
         </AdminOnlyOverlay>
     );

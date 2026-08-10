@@ -1,0 +1,70 @@
+[{
+  "_id": {
+    "$oid": "6a676e857238f9f0e2be5a4d"
+  },
+  "title": "Intro Slot",
+  "coordinator": "purva oak",
+  "date": "28 July",
+  "time": "6 PM",
+  "venue": "music room",
+  "members": 6,
+  "createdAt": {
+    "$date": "2026-07-27T14:43:17.256Z"
+  },
+  "updatedAt": {
+    "$date": "2026-08-09T10:03:02.421Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6a68e8cf850993111d935c45"
+  },
+  "title": "Patriotic",
+  "coordinator": "harshita",
+  "date": "28 July",
+  "time": "6 PM",
+  "venue": "Music room",
+  "members": 6,
+  "createdAt": {
+    "$date": "2026-07-28T17:37:19.027Z"
+  },
+  "updatedAt": {
+    "$date": "2026-07-29T18:00:20.137Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6a6a4024f13d05615b61a431"
+  },
+  "title": "Victory",
+  "coordinator": "Sopan",
+  "time": "7 pm",
+  "venue": "Music room",
+  "members": 7,
+  "createdAt": {
+    "$date": "2026-07-29T18:02:12.392Z"
+  },
+  "updatedAt": {
+    "$date": "2026-07-29T18:02:12.392Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6a6b5813e4edea65c3d60cbf"
+  },
+  "title": "Imotionaly Intense",
+  "coordinator": "Bhavana",
+  "time": "9 pm",
+  "venue": "Music room",
+  "members": 7,
+  "createdAt": {
+    "$date": "2026-07-30T13:56:35.012Z"
+  },
+  "updatedAt": {
+    "$date": "2026-07-30T13:56:35.012Z"
+  },
+  "__v": 0
+}]

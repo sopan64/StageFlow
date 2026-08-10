@@ -28,3 +28,10 @@
     margin: 0;
     color: #666;
 }
+
+.empty-message {
+    text-align: center;
+    color: #777;
+    padding: 30px 0;
+    font-size: 16px;
+}

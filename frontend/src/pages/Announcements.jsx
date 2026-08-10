@@ -6,8 +6,9 @@ function Announcements({ announcements }) {
         <div className="announcements-page">
             <h2>Announcements</h2>
             <div className="announcements-container">
-                {
-                announcements.map((announcement) => (
+                {announcements.length === 0 ? (
+                    <p className="empty-message">No announcements yet...</p>
+                ):(announcements.map((announcement) => (
                     <div key={announcement._id} className="announcement-item">
                         <h4>
                             {announcement.type === "admin"
@@ -27,7 +28,7 @@ function Announcements({ announcements }) {
                         </p>
                     </div>
                 ))
-                }
+                )}
             </div>
         </div>
     );

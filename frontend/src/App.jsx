@@ -153,7 +153,7 @@ function App(){
             <Route path="/manage-event" 
               element={ event.length > 0 
                 ? <ManageEvent event={event} setEvent={setEvent} announcements={announcements} setAnnouncements={setAnnouncements}/>
-                : <p>Loading event...</p>
+                : <p className="empty-message">No any event yet...</p>
               } 
             />
           </Route>
