@@ -15,8 +15,7 @@ function AdminOnlyOverlay({ children }) {
 
             <div className="admin-overlay">
                 <div className="admin-message">
-                    <h2>🔒 Admin Only</h2>
-                    <h5>(You are not an admin)</h5>
+                    <h2>🔒 Admins Only</h2>
                     <p>This feature is available only to administrators.</p>
                 </div>
             </div>

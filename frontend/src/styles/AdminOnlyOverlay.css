@@ -4,7 +4,7 @@
 }
 
 .blurred-content {
-    filter: blur(2px);
+    filter: blur(2.5px);
     pointer-events: none;
     user-select: none;
 }
