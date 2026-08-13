@@ -36,6 +36,7 @@ function Sidebar({ isOpen, onClose }){
             <NavLink to="/manage-users" onClick={handleNavClick}>Manage Users</NavLink>
             <Button 
                 text="Logout"
+                className="red-button"
                 onClick={() => {
                     const confirmLogout = window.confirm(
                         "Are you sure want to Logout?"

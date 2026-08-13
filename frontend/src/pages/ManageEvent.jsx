@@ -74,6 +74,7 @@ function ManageEvent({event, setEvent, announcements, setAnnouncements}) {
     return (
         <AdminOnlyOverlay>
         <div className="manage-event">
+            <div className="manage-event-content">
             <h2>Manage Event</h2>
             {
                 error && <p className="error">{error}</p>
@@ -100,6 +101,7 @@ function ManageEvent({event, setEvent, announcements, setAnnouncements}) {
                 text="Update Event"
                 onClick={handleSaveChanges}
             />
+            </div>
         </div>
         </AdminOnlyOverlay>
     );

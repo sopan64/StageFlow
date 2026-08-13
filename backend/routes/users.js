@@ -90,9 +90,11 @@ router.post("/register", async(req, res) => {
             role: "member"
         }
 
-        const createdUser = await User.create(newUser);
+        await User.create(newUser);
 
-        res.status(201).json(createdUser);
+        res.status(201).json({
+            message: "Registration successful!"
+        });
     }
     catch (err) {
         res.status(400).json({

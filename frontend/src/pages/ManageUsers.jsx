@@ -32,6 +32,7 @@ function ManageUsers({ users, setUsers }) {
     return (
         <AdminOnlyOverlay>
             <div className="manage-users">
+                <div className="manage-users-content">
                 <h2>Manage Users</h2>
 
                 {users.length ===  0 ? (
@@ -53,6 +54,7 @@ function ManageUsers({ users, setUsers }) {
                         />
                     </div>
                 )))}
+                </div>
             </div>
         </AdminOnlyOverlay>
     );

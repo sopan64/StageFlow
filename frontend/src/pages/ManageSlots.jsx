@@ -96,6 +96,7 @@ function ManageSlots({ slots, setSlots, handleDeleteSlot, announcements, setAnno
     return (
         <AdminOnlyOverlay>
         <div className="admin-page">
+            <div className="admin-page-content">
             <h1>Manage Slots</h1>
 
             {
@@ -161,6 +162,7 @@ function ManageSlots({ slots, setSlots, handleDeleteSlot, announcements, setAnno
                             />
                             <Button 
                                 text="Delete"
+                                className="red-button"
                             onClick={() => {
                                 const confirmDelete = window.confirm(
                                     `Are you sure want to Delete "${slot.title}"?`
@@ -174,7 +176,7 @@ function ManageSlots({ slots, setSlots, handleDeleteSlot, announcements, setAnno
                     </div>
                 ))
             )}
-
+        </div>
         </div>
         </AdminOnlyOverlay>
     );

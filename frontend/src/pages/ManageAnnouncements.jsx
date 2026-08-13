@@ -86,6 +86,7 @@ function ManageAnnouncements({ announcements, setAnnouncements }) {
     return (
         <AdminOnlyOverlay>
             <div className="manage-announcements">
+                <div className="manage-announcements-content">
                 <h2>Manage Announcements</h2>
 
                 {error && <p className="error">{error}</p>}
@@ -135,6 +136,7 @@ function ManageAnnouncements({ announcements, setAnnouncements }) {
                             <div className="announcement-actions">
                                 <Button
                                     text="Delete"
+                                    className="red-button"
                                     onClick={() =>
                                         handleDeleteAnnouncement(
                                             announcement._id
@@ -145,6 +147,7 @@ function ManageAnnouncements({ announcements, setAnnouncements }) {
                         </div>
                     ))
                 )}
+                </div>
             </div>
         </AdminOnlyOverlay>
     );
