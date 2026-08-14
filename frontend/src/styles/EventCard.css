@@ -1,16 +1,31 @@
 .event-card {
-    background: white;
-    border-radius: 12px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+    background: rgba(24, 24, 32, 0.9);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 16px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.35);
 
     width: 100%;
     padding: 24px;
+
+    transition: transform 0.25s ease, border-color 0.25s ease;
+}
+
+.event-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(129, 140, 248, 0.5);
 }
 
 .event-card h2 {
     margin: 0 0 15px 0;
+    color: #ffffff;
 }
 
 .event-card h3 {
     margin: 0 0 10px 0;
+    color: #a5b4fc;
+}
+
+.event-card p {
+    color: #d1d5db;
+    line-height: 1.5;
 }

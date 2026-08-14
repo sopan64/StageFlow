@@ -1,14 +1,23 @@
 .myslots-card {
-    background: white;
-    border-radius: 12px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+    background: rgba(24, 24, 32, 0.9);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 16px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.35);
 
     width: 100%;
     padding: 24px;
+
+    transition: transform 0.25s ease, border-color 0.25s ease;
+}
+
+.myslots-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(129, 140, 248, 0.5);
 }
 
 .myslots-card h2 {
     margin: 0 0 15px 0;
+    color: #ffffff;
 }
 
 .slot-item {
@@ -17,10 +26,17 @@
     align-items: center;
 
     margin: 12px 0;
-    padding: 10px 14px;
+    padding: 12px 14px;
 
-    background: #f9fafb;
-    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 10px;
+
+    transition: background 0.2s ease;
+}
+
+.slot-item:hover {
+    background: rgba(129, 140, 248, 0.1);
 }
 
 .slot-actions {
@@ -31,4 +47,5 @@
 .slot-name {
     cursor: pointer;
     font-weight: 600;
+    color: #e5e7eb;
 }
