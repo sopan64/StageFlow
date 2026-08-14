@@ -101,6 +101,7 @@ function EditSlot({ slots, setSlots, announcements, setAnnouncements }){
 
     return (
         <div className="edit-page">
+            <div className="edit-page-content">
             <h1>Edit Slot</h1>
 
             {
@@ -147,7 +148,7 @@ function EditSlot({ slots, setSlots, announcements, setAnnouncements }){
                 className="form-btn"
                 onClick={handleUpdateSlot}
             />
-
+            </div>
         </div>
     );
 }

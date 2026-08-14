@@ -8,7 +8,7 @@ function AdminOnlyOverlay({ children }) {
     }
 
     return (
-        <div className="admin-page">
+        <div className="overlay-wrapper">
             <div className="blurred-content">
                 {children}
             </div>

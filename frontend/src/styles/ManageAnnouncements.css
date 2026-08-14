@@ -5,34 +5,42 @@
 }
 
 .manage-announcements-content {
-    background: white;
+    background: #141414;
+    border: 1px solid rgba(255, 255, 255, 0.08);
     border-radius: 12px;
     padding: 30px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.35);
 }
 
 .manage-announcements-content h2 {
     margin: 0 0 20px 0;
+    color: #f5f5f5;
+}
+
+.manage-announcements-content h3 {
+    color: #f5f5f5;
 }
 
 .manage-announcements-content textarea {
     width: 100%;
     padding: 12px;
-    border: 1px solid #d1d5db;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 8px;
     resize: vertical;
     font-size: 15px;
+    color: #f5f5f5;
 }
 
 .manage-announcements-content hr {
     margin: 25px 0;
     border: none;
-    border-top: 1px solid #e5e7eb;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .announcement-item {
     padding: 18px 0;
-    border-bottom: 1px solid #e5e7eb;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .announcement-item:last-child {
@@ -42,10 +50,11 @@
 .announcement-item p {
     margin: 6px 0;
     line-height: 1.5;
+    color: #e5e7eb;
 }
 
 .announcement-date {
-    color: #6b7280;
+    color: #9ca3af;
     font-size: 14px;
 }
 
@@ -55,6 +64,6 @@
 
 .empty-message {
     text-align: center;
-    color: #6b7280;
+    color: #9ca3af;
     padding: 20px 0;
 }

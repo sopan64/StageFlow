@@ -20,6 +20,12 @@
     color: #ffffff;
 }
 
+.myslots-item-name {
+    cursor: pointer;
+    font-weight: 600;
+    color: #e5e7eb;
+}
+
 .slot-item {
     display: flex;
     justify-content: space-between;
@@ -42,10 +48,4 @@
 .slot-actions {
     display: flex;
     gap: 10px;
-}
-
-.slot-name {
-    cursor: pointer;
-    font-weight: 600;
-    color: #e5e7eb;
 }

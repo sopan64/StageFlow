@@ -29,3 +29,9 @@
     color: #d1d5db;
     line-height: 1.5;
 }
+
+.event-card .empty-message {
+    color: #9ca3af;
+    text-align: center;
+    padding: 20px 0;
+}

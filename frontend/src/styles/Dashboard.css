@@ -3,10 +3,10 @@
     flex-wrap: wrap;
     gap: 24px;
 
-    padding: 30px;
+    padding: 30px 30px;
 }
 
 .dashboard > * {
     flex: 1;
-    min-width: 300px;
+    min-width: 280px;
 }

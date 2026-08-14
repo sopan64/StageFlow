@@ -15,12 +15,14 @@ function SlotDetails({slots}){
 
     return (
         <div className="slot-details">
+            <div className="slot-details-content">
             <h1>Slot Details</h1>
             <h2>{slot.title}</h2>
             <p>Coordinator: {slot.coordinator}</p>
             <p>Time: {slot.time}</p>
             <p>Members: {slot.members}</p>
             <p>Venue: {slot.venue}</p>
+            </div>
         </div>
     );
 }

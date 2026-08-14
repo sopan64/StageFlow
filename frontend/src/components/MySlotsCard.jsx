@@ -17,7 +17,7 @@ function MySlotsCard({ slots }){
                     >
                         <p
                             onClick={() => navigate(`/slotdetails/${slot._id}`)}
-                            className="slot-name"
+                        className="myslots-item-name"
                         >
                             {slot.title}
                         </p>
