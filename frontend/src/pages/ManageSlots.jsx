@@ -12,7 +12,9 @@ function ManageSlots({ slots, setSlots, handleDeleteSlot, announcements, setAnno
     const [coordinatorEmail, setCoordinatorEmail] = useState("");
     const [coordinatorResults, setCoordinatorResults] = useState([]);
     const [time, setTime] = useState("");
-    const [members, setMembers] = useState("");
+    const [members, setMembers] = useState([]);
+    const [memberEmail, setMemberEmail] = useState("");
+    const [memberResults, setMemberResults] = useState([]);
     const [venue, setVenue] = useState("");
     const navigate = useNavigate();
 
@@ -48,22 +50,49 @@ function ManageSlots({ slots, setSlots, handleDeleteSlot, announcements, setAnno
         }
     }
 
+    async function searchMembers(email) {
+    setMemberEmail(email);
+
+    if (!email) {
+        setMemberResults([]);
+        return;
+    }
+
+    try {
+        const token = localStorage.getItem("token");
+
+        const response = await fetch(
+            `${import.meta.env.VITE_API_URL}/users/search?email=${email}`,
+            {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            }
+        );
+
+        const data = await response.json();
+
+        if (response.ok) {
+            setMemberResults(data);
+        }
+    }
+    catch (err) {
+        console.log(err);
+    }
+}
+
     async function handleCreateSlot(){
         
-        if(!name || !coordinator || !time || !members || !venue){
+        if(!name || !coordinator || !time || !venue){
             setError("Please fill all fields!");
-            return;
-        }
-        if(Number(members) < 1){
-            setError("Members should be greater than or equal to 1!");
             return;
         }
 
         const newslot = {
             title: name,
-            coordinator,
+            coordinator: coordinator._id,
             time,
-            members: Number(members),
+            members: members.map((user) => user._id),
             venue
         };
 
@@ -95,7 +124,9 @@ function ManageSlots({ slots, setSlots, handleDeleteSlot, announcements, setAnno
         setName("");
         setCoordinator("");
         setTime("");
-        setMembers("");
+        setMembers([]);
+        setMemberEmail("");
+        setMemberResults([]);
         setVenue("");
         setError("");
 
@@ -174,12 +205,42 @@ function ManageSlots({ slots, setSlots, handleDeleteSlot, announcements, setAnno
             />
 
             <Input 
-                type="number"
-                min="1"
-                placeholder="Members"
-                value={members}
-                onChange={(e) => setMembers(e.target.value)}
+                type="text"
+                placeholder="Search members by email"
+                value={memberEmail}
+                onChange={(e) => searchMembers(e.target.value)}
             />
+
+            {memberResults.map((user) => (
+    <div key={user._id}>
+        <p>{user.name}</p>
+        <p>{user.email}</p>
+
+        <Button
+            text="Add"
+            onClick={() => {
+                setMembers((prev) => [...prev, user]);
+                setMemberEmail("");
+                setMemberResults([]);
+            }}
+        />
+    </div>
+))}
+
+{members.map((user) => (
+    <div key={user._id}>
+        <span>{user.name}</span>
+
+        <Button
+            text="Remove"
+            onClick={() => {
+                setMembers((prev) =>
+                    prev.filter((member) => member._id !== user._id)
+                );
+            }}
+        />
+    </div>
+))}
 
             <Input 
                 type="text"
