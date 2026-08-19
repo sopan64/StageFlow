@@ -7,7 +7,8 @@ const slotSchema = new mongoose.Schema({
     },
 
     coordinator: {
-        type: String,
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User",
         required: true,
     },
 
@@ -21,10 +22,10 @@ const slotSchema = new mongoose.Schema({
         required: true,
     },
 
-    members: {
-        type: Number,
-        required: true,
-    },
+    members: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User"
+    }],
 }, {
     timestamps: true,
 });

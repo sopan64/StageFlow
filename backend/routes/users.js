@@ -9,7 +9,22 @@ const jwt = require("jsonwebtoken");
 const auth = require("../middleware/auth");
 const admin = require("../middleware/admin");
 
-router.get("/", auth, async(req, res) => {
+router.get("/search", auth, admin, async (req, res) => {
+    try {
+        const users = await User.find({
+            email: { $regex: req.query.email, $options: "i" }
+        }).select("-password");
+
+        res.status(200).json(users);
+    }
+    catch (err) {
+        res.status(500).json({
+            error: err.message
+        });
+    }
+});
+
+router.get("/", auth, admin, async(req, res) => {
     try{
         const users = await User.find().select("-password");
 

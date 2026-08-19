@@ -8,7 +8,9 @@ const router = express.Router();
 
 router.get("/", auth, async (req, res) => {
     try{
-        const slots = await Slot.find();
+        const slots = await Slot.find()
+            .populate("coordinator", "name email")
+            .populate("members", "name email");
 
         res.status(200).json(slots);
     }

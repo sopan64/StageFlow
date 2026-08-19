@@ -8,11 +8,45 @@ import AdminOnlyOverlay from "../components/AdminOnlyOverlay";
 function ManageSlots({ slots, setSlots, handleDeleteSlot, announcements, setAnnouncements }){
     const [error, setError] = useState("");
     const [name, setName] = useState("");
-    const [coordinator, setCoordinator] = useState("");
+    const [coordinator, setCoordinator] = useState(null);
+    const [coordinatorEmail, setCoordinatorEmail] = useState("");
+    const [coordinatorResults, setCoordinatorResults] = useState([]);
     const [time, setTime] = useState("");
     const [members, setMembers] = useState("");
     const [venue, setVenue] = useState("");
     const navigate = useNavigate();
+
+
+    async function searchCoordinator(email) {
+        setCoordinatorEmail(email);
+
+        if (!email) {
+            setCoordinatorResults([]);
+            return;
+        }
+
+        try {
+            const token = localStorage.getItem("token");
+
+            const response = await fetch(
+                `${import.meta.env.VITE_API_URL}/users/search?email=${email}`,
+                {
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    }
+                }
+            );
+
+            const data = await response.json();
+
+            if (response.ok) {
+                setCoordinatorResults(data);
+            }
+        }
+        catch (err) {
+            console.log(err);
+        }
+    }
 
     async function handleCreateSlot(){
         
@@ -111,10 +145,26 @@ function ManageSlots({ slots, setSlots, handleDeleteSlot, announcements, setAnno
 
             <Input 
                 type="text"
-                placeholder="Coordinator name"
-                value={coordinator}
-                onChange={(e) => setCoordinator(e.target.value)}
+                placeholder="Search coordinator by email"
+                value={coordinatorEmail}
+                onChange={(e) => searchCoordinator(e.target.value)}
             />
+
+            {coordinatorResults.map((user) => (
+    <div key={user._id}>
+        <p>{user.name}</p>
+        <p>{user.email}</p>
+
+        <Button
+            text="Select"
+            onClick={() => {
+                setCoordinator(user);
+                setCoordinatorEmail(user.email);
+                setCoordinatorResults([]);
+            }}
+        />
+    </div>
+))}
 
             <Input 
                 type="text"
