@@ -18,9 +18,17 @@ function SlotDetails({slots}){
             <div className="slot-details-content">
             <h1>Slot Details</h1>
             <h2>{slot.title}</h2>
-            <p>Coordinator: {slot.coordinator}</p>
+            <p>Coordinator: {slot.coordinator?.name}</p>
             <p>Time: {slot.time}</p>
-            <p>Members: {slot.members}</p>
+            <p>Members</p>
+
+<div className="slot-members">
+    {slot.members.map((member) => (
+        <div className="slot-member" key={member._id}>
+            <span>{member.name}</span>
+        </div>
+    ))}
+</div>
             <p>Venue: {slot.venue}</p>
             </div>
         </div>

@@ -42,7 +42,9 @@ router.put("/:id", auth, admin, async (req, res) => {
             req.params.id,
             req.body,
             {new: true}
-        );
+        )
+        .populate("coordinator", "name email")
+        .populate("members", "name email");
 
         if(!updatedSlot){
             return res.status(404).json({

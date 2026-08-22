@@ -3,7 +3,10 @@ import { useNavigate } from "react-router-dom";
 import Button from "./Button";
 
 function MySlotsCard({ slots }){
+    
+    const user = localStorage.getItem("user");
     const navigate = useNavigate();
+    
 
     return (
         <div className="myslots-card">
@@ -17,7 +20,7 @@ function MySlotsCard({ slots }){
                     >
                         <p
                             onClick={() => navigate(`/slotdetails/${slot._id}`)}
-                        className="myslots-item-name"
+                            className="myslots-item-name"
                         >
                             {slot.title}
                         </p>

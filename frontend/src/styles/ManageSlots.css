@@ -52,3 +52,53 @@
     color: #9ca3af;
     padding: 20px 0;
 }
+
+.admin-page select {
+    width: 100%;
+    padding: 10px 12px;
+    margin: 8px 0;
+
+    border: 1px solid #333;
+    border-radius: 8px;
+
+    font-size: 15px;
+    background: #1f1f1f;
+    color: #718096;
+
+    box-sizing: border-box;
+}
+
+.member-search-results {
+    max-height: 200px;
+    overflow-y: auto;
+
+    margin: 5px 0 15px;
+
+    background: #1f1f1f;
+    border: 1px solid #333;
+    border-radius: 8px;
+}
+
+.member-search-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 10px 12px;
+    border-bottom: 1px solid #333;
+}
+
+.member-search-item:last-child {
+    border-bottom: none;
+}
+
+.member-search-item p {
+    margin: 0 0 3px;
+    color: #f5f5f5;
+    font-weight: 600;
+}
+
+.member-search-item span {
+    color: #718096;
+    font-size: 13px;
+}

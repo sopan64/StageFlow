@@ -9,46 +9,12 @@ function ManageSlots({ slots, setSlots, handleDeleteSlot, announcements, setAnno
     const [error, setError] = useState("");
     const [name, setName] = useState("");
     const [coordinator, setCoordinator] = useState(null);
-    const [coordinatorEmail, setCoordinatorEmail] = useState("");
-    const [coordinatorResults, setCoordinatorResults] = useState([]);
     const [time, setTime] = useState("");
     const [members, setMembers] = useState([]);
     const [memberEmail, setMemberEmail] = useState("");
     const [memberResults, setMemberResults] = useState([]);
     const [venue, setVenue] = useState("");
     const navigate = useNavigate();
-
-
-    async function searchCoordinator(email) {
-        setCoordinatorEmail(email);
-
-        if (!email) {
-            setCoordinatorResults([]);
-            return;
-        }
-
-        try {
-            const token = localStorage.getItem("token");
-
-            const response = await fetch(
-                `${import.meta.env.VITE_API_URL}/users/search?email=${email}`,
-                {
-                    headers: {
-                        Authorization: `Bearer ${token}`
-                    }
-                }
-            );
-
-            const data = await response.json();
-
-            if (response.ok) {
-                setCoordinatorResults(data);
-            }
-        }
-        catch (err) {
-            console.log(err);
-        }
-    }
 
     async function searchMembers(email) {
     setMemberEmail(email);
@@ -88,6 +54,11 @@ function ManageSlots({ slots, setSlots, handleDeleteSlot, announcements, setAnno
             return;
         }
 
+        if(members.length === 0){
+            setError("Please add atleast one member!");
+            return;
+        }
+
         const newslot = {
             title: name,
             coordinator: coordinator._id,
@@ -122,7 +93,7 @@ function ManageSlots({ slots, setSlots, handleDeleteSlot, announcements, setAnno
 
         setSlots((prevSlots) => [...prevSlots, slotsData.slot]);
         setName("");
-        setCoordinator("");
+        setCoordinator(null);
         setTime("");
         setMembers([]);
         setMemberEmail("");
@@ -172,30 +143,7 @@ function ManageSlots({ slots, setSlots, handleDeleteSlot, announcements, setAnno
                 placeholder="Slot name"
                 value={name}
                 onChange={(e) => setName(e.target.value)} 
-            />
-
-            <Input 
-                type="text"
-                placeholder="Search coordinator by email"
-                value={coordinatorEmail}
-                onChange={(e) => searchCoordinator(e.target.value)}
-            />
-
-            {coordinatorResults.map((user) => (
-    <div key={user._id}>
-        <p>{user.name}</p>
-        <p>{user.email}</p>
-
-        <Button
-            text="Select"
-            onClick={() => {
-                setCoordinator(user);
-                setCoordinatorEmail(user.email);
-                setCoordinatorResults([]);
-            }}
-        />
-    </div>
-))}
+            />            
 
             <Input 
                 type="text"
@@ -211,36 +159,57 @@ function ManageSlots({ slots, setSlots, handleDeleteSlot, announcements, setAnno
                 onChange={(e) => searchMembers(e.target.value)}
             />
 
-            {memberResults.map((user) => (
-    <div key={user._id}>
-        <p>{user.name}</p>
-        <p>{user.email}</p>
+{memberResults.length > 0 && (
+    <div className="member-search-results">
+        {memberResults.map((user) => (
+            <div className="member-search-item" key={user._id}>
+                <div>
+                    <p>{user.name}</p>
+                    <span>{user.email}</span>
+                </div>
 
-        <Button
-            text="Add"
-            onClick={() => {
-                setMembers((prev) => [...prev, user]);
-                setMemberEmail("");
-                setMemberResults([]);
-            }}
-        />
+                <Button
+                    text="Add"
+                    onClick={() => {
+                        setMembers((prev) => {
+                            if (prev.some((member) => member._id === user._id)) {
+                                return prev;
+                            }
+
+                            return [...prev, user];
+                        });
+
+                        setMemberEmail("");
+                        setMemberResults([]);
+                    }}
+                />
+            </div>
+        ))}
     </div>
-))}
+)}
 
-{members.map((user) => (
-    <div key={user._id}>
-        <span>{user.name}</span>
+{members.length > 0 && (
+    <div className="member-search-results member-list">
+        {members.map((user) => (
+            <div className="member-search-item" key={user._id}>
+                <div>
+                    <p>{user.name}</p>
+                    <span>{user.email}</span>
+                </div>
 
-        <Button
-            text="Remove"
-            onClick={() => {
-                setMembers((prev) =>
-                    prev.filter((member) => member._id !== user._id)
-                );
-            }}
-        />
+                <Button
+                    text="Remove"
+                    className="red-button"
+                    onClick={() => {
+                        setMembers((prev) =>
+                            prev.filter((member) => member._id !== user._id)
+                        );
+                    }}
+                />
+            </div>
+        ))}
     </div>
-))}
+)}
 
             <Input 
                 type="text"
@@ -248,6 +217,27 @@ function ManageSlots({ slots, setSlots, handleDeleteSlot, announcements, setAnno
                 value={venue}
                 onChange={(e) => setVenue(e.target.value)}
             />
+
+{members.length > 0 && (
+    <select
+        value={coordinator?._id || ""}
+        onChange={(e) => {
+            const selectedUser = members.find(
+                (user) => user._id === e.target.value
+            );
+
+            setCoordinator(selectedUser);
+        }}
+    >
+        <option value="">Assign Coordinator</option>
+
+        {members.map((user) => (
+            <option key={user._id} value={user._id}>
+                {user.name} - {user.email}
+            </option>
+        ))}
+    </select>
+)}
 
             <Button 
                 text="Create Slot"
