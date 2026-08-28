@@ -6,7 +6,7 @@ function Topbar() {
     return (
         <div className="topbar">
 
-            <h3>Welcome {user?.name?.split(" ")[0]} !</h3>
+            <h3>Welcome, {user?.name?.split(" ")[0]}👋</h3>
 
         </div>
     );

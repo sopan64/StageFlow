@@ -20,32 +20,28 @@
     color: #ffffff;
 }
 
-.myslots-item-name {
-    cursor: pointer;
-    font-weight: 600;
-    color: #e5e7eb;
-}
-
 .slot-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-
     margin: 12px 0;
-    padding: 12px 14px;
-
+    padding: 16px;
     background: rgba(255, 255, 255, 0.04);
     border: 1px solid rgba(255, 255, 255, 0.06);
     border-radius: 10px;
-
-    transition: background 0.2s ease;
+    cursor: pointer;
+    transition: background 0.2s ease, transform 0.2s ease;
 }
 
 .slot-item:hover {
     background: rgba(129, 140, 248, 0.1);
+    transform: translateY(-2px);
 }
 
-.slot-actions {
-    display: flex;
-    gap: 10px;
+.slot-item h3 {
+    margin: 0 0 12px;
+    color: #ffffff;
+}
+
+.slot-item p {
+    margin: 6px 0;
+    color: #9ca3af;
+    font-size: 14px;
 }

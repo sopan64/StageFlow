@@ -166,43 +166,57 @@ async function searchMembers(email) {
                 onChange={(e) => searchMembers(e.target.value)}
             />
 
-{memberResults.map((user) => (
-    <div key={user._id}>
-        <p>{user.name}</p>
-        <p>{user.email}</p>
+{memberResults.length > 0 && (
+    <div className="member-search-results">
+        {memberResults.map((user) => (
+            <div className="member-search-item" key={user._id}>
+                <div>
+                    <p>{user.name}</p>
+                    <span>{user.email}</span>
+                </div>
 
-        <Button
-            text="Add"
-            onClick={() => {
-                setMembers((prev) => {
-                    if (prev.some((member) => member._id === user._id)) {
-                        return prev;
-                    }
+                <Button
+                    text="Add"
+                    onClick={() => {
+                        setMembers((prev) => {
+                            if (prev.some((member) => member._id === user._id)) {
+                                return prev;
+                            }
 
-                    return [...prev, user];
-                });
+                            return [...prev, user];
+                        });
 
-                setMemberEmail("");
-                setMemberResults([]);
-            }}
-        />
+                        setMemberEmail("");
+                        setMemberResults([]);
+                    }}
+                />
+            </div>
+        ))}
     </div>
-))}
+)}
 
-{members.map((user) => (
-    <div key={user._id}>
-        <span>{user.name}</span>
+{members.length > 0 && (
+    <div className="member-search-results member-list">
+        {members.map((user) => (
+            <div className="member-search-item" key={user._id}>
+                <div>
+                    <p>{user.name}</p>
+                    <span>{user.email}</span>
+                </div>
 
-        <Button
-            text="Remove"
-            onClick={() => {
-                setMembers((prev) =>
-                    prev.filter((member) => member._id !== user._id)
-                );
-            }}
-        />
+                <Button
+                    text="Remove"
+                    className="red-button"
+                    onClick={() => {
+                        setMembers((prev) =>
+                            prev.filter((member) => member._id !== user._id)
+                        );
+                    }}
+                />
+            </div>
+        ))}
     </div>
-))}
+)}
 
             <Input 
                 type="text"

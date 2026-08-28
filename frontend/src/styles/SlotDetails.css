@@ -1,47 +1,71 @@
 .slot-details {
-    max-width: 650px;
-    margin: 30px auto;
-    padding: 0 20px;
-    box-sizing: border-box;
-}
-
-.slot-details-content {
+    width: 90%;
+    max-width: 700px;
+    margin: 40px auto;
     padding: 25px;
 
-    background: #141414;
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: #151515;
+    border: 1px solid #2a2a2a;
     border-radius: 12px;
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.35);
-}
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
 
-.slot-details-content h1 {
-    color: #f5f5f5;
-    margin: 0 0 10px;
-}
-
-.slot-details-content h2 {
-    margin-bottom: 20px;
-    color: #f5f5f5;
-}
-
-.slot-details-content p {
-    margin: 12px 0;
-    font-size: 16px;
     color: #e5e7eb;
 }
 
+.slot-details h1 {
+    margin-bottom: 10px;
+    color: #ffffff;
+}
+
+.slot-details h2 {
+    margin-bottom: 20px;
+    color: #818cf8;
+}
+
+.slot-info {
+    margin: 20px 0;
+}
+
+.slot-info p {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 10px 0;
+    margin: 0;
+
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.slot-info strong {
+    color: #9ca3af;
+    font-weight: 500;
+}
+
+.members-title {
+    margin-top: 25px !important;
+    margin-bottom: 10px !important;
+
+    font-weight: 600;
+    color: #ffffff;
+}
+
 .slot-members {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+
     margin-top: 10px;
 }
 
 .slot-member {
     padding: 10px 12px;
-    margin: 8px 0;
 
-    background: #1f1f1f;
-    border: 1px solid #333;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.06);
     border-radius: 8px;
+}
 
-    color: #f5f5f5;
-    font-weight: 600;
+.slot-member span {
+    color: #e5e7eb;
 }
