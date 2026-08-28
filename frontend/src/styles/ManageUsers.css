@@ -5,16 +5,16 @@
 }
 
 .manage-users-content {
-    background: #141414;
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: var(--bg-panel);
+    border: 1px solid var(--border-subtle);
     border-radius: 12px;
     padding: 30px;
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.35);
+    box-shadow: var(--shadow-card);
 }
 
 .manage-users-content h2 {
     margin: 0 0 20px 0;
-    color: #f5f5f5;
+    color: var(--text-primary);
 }
 
 .user-item {
@@ -23,7 +23,7 @@
     align-items: center;
 
     padding: 15px 0;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    border-bottom: 1px solid var(--border-subtle);
     gap: 15px;
 }
 
@@ -33,17 +33,17 @@
 
 .user-info h3 {
     margin: 0 0 5px 0;
-    color: #f5f5f5;
+    color: var(--text-primary);
 }
 
 .user-info p {
     margin: 0;
-    color: #9ca3af;
+    color: var(--text-muted);
     font-size: 14px;
 }
 
 .empty-message {
     text-align: center;
-    color: #9ca3af;
+    color: var(--text-muted);
     padding: 20px 0;
 }

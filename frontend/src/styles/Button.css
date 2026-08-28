@@ -1,23 +1,23 @@
 .button {
     padding: 10px 20px;
-    border: 1px solid rgba(129, 140, 248, 0.5);
+    border: 1px solid var(--accent-border);
     border-radius: 8px;
     cursor: pointer;
     font-size: 15px;
     font-weight: 600;
     letter-spacing: 0.3px;
 
-    background: rgba(99, 102, 241, 0.15);
-    color: #c7d2fe;
+    background: var(--accent-glow-soft);
+    color: var(--accent-lighter);
 
-    box-shadow: 0 0 12px rgba(99, 102, 241, 0.15);
+    box-shadow: 0 0 12px var(--accent-glow-soft);
     transition: all 0.25s ease;
 }
 
 .button:hover {
-    background: rgba(99, 102, 241, 0.25);
-    color: #ffffff;
-    box-shadow: 0 0 20px rgba(99, 102, 241, 0.4);
+    background: var(--accent-glow-medium);
+    color: var(--text-heading);
+    box-shadow: 0 0 20px var(--accent-glow-strong);
     transform: translateY(-2px);
 }
 
@@ -26,14 +26,14 @@
 }
 
 .red-button {
-    border-color: rgba(239, 68, 68, 0.5);
-    background: rgba(239, 68, 68, 0.15);
-    color: #fca5a5;
-    box-shadow: 0 0 12px rgba(239, 68, 68, 0.15);
+    border-color: var(--danger-border);
+    background: var(--danger-glow-soft);
+    color: var(--danger-light);
+    box-shadow: 0 0 12px var(--danger-glow-soft);
 }
 
 .red-button:hover {
-    background: rgba(239, 68, 68, 0.25);
-    color: #ffffff;
-    box-shadow: 0 0 20px rgba(239, 68, 68, 0.4);
+    background: var(--danger-glow-medium);
+    color: var(--text-heading);
+    box-shadow: 0 0 20px var(--danger-glow-strong);
 }

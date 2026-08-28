@@ -2,16 +2,74 @@
     box-sizing: border-box;
 }
 
+:root {
+    /* Surfaces */
+    --bg-void: #0a0a0a;
+    --bg-base: #0b0b0f;
+    --bg-panel: #141414;
+    --bg-surface: #1f1f1f;
+    --bg-card: rgba(24, 24, 32, 0.9);
+    --surface-hover: rgba(255, 255, 255, 0.04);
+
+    /* Text */
+    --text-heading: #ffffff;
+    --text-primary: #f5f5f5;
+    --text-secondary: #e5e7eb;
+    --text-muted: #9ca3af;
+    --text-faint: #718096;
+    --text-placeholder: #6b7280;
+
+    /* Accent (indigo/purple) */
+    --accent: #818cf8;
+    --accent-light: #a5b4fc;
+    --accent-lighter: #c7d2fe;
+    --accent-blob: rgba(99, 102, 241, 0.12);
+    --accent-blob-2: rgba(168, 85, 247, 0.10);
+    --accent-glow-soft: rgba(99, 102, 241, 0.15);
+    --accent-glow-medium: rgba(99, 102, 241, 0.25);
+    --accent-glow-strong: rgba(99, 102, 241, 0.4);
+    --accent-hover-bg-soft: rgba(129, 140, 248, 0.1);
+    --accent-hover-bg: rgba(129, 140, 248, 0.15);
+    --accent-active-bg: rgba(129, 140, 248, 0.25);
+    --accent-border: rgba(129, 140, 248, 0.5);
+
+    /* Danger (red) */
+    --danger: #f87171;
+    --danger-light: #fca5a5;
+    --danger-border: rgba(239, 68, 68, 0.5);
+    --danger-glow-soft: rgba(239, 68, 68, 0.15);
+    --danger-glow-medium: rgba(239, 68, 68, 0.25);
+    --danger-glow-strong: rgba(239, 68, 68, 0.4);
+
+    /* Success (green) */
+    --success: #4ade80;
+
+    /* Borders */
+    --border-faint: rgba(255, 255, 255, 0.06);
+    --border-subtle: rgba(255, 255, 255, 0.08);
+    --border-default: rgba(255, 255, 255, 0.1);
+    --border-strong: #333333;
+
+    /* Shadows */
+    --shadow-card: 0 8px 30px rgba(0, 0, 0, 0.35);
+
+    /* Radius */
+    --radius-sm: 8px;
+    --radius-md: 10px;
+    --radius-lg: 12px;
+    --radius-xl: 16px;
+}
+
 body {
     margin: 0;
     font-family: Arial, sans-serif;
 
     background:
-        radial-gradient(circle at 20% 20%, rgba(99, 102, 241, 0.12), transparent 30%),
-        radial-gradient(circle at 80% 80%, rgba(168, 85, 247, 0.10), transparent 30%),
-        #0b0b0f;
+        radial-gradient(circle at 20% 20%, var(--accent-blob), transparent 30%),
+        radial-gradient(circle at 80% 80%, var(--accent-blob-2), transparent 30%),
+        var(--bg-base);
 
-    color: #f5f5f5;
+    color: var(--text-primary);
 }
 
 button,

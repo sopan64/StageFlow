@@ -33,10 +33,10 @@
 
 .admin-message h2 {
     margin: 0 0 8px;
-    color: #f5f5f5;
+    color: var(--text-primary);
 }
 
 .admin-message p {
     margin: 0;
-    color: #9ca3af;
+    color: var(--text-muted);
 }

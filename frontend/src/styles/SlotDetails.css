@@ -4,22 +4,22 @@
     margin: 40px auto;
     padding: 25px;
 
-    background: #151515;
-    border: 1px solid #2a2a2a;
+    background: var(--bg-panel);
+    border: 1px solid var(--border-subtle);
     border-radius: 12px;
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+    box-shadow: var(--shadow-card);
 
-    color: #e5e7eb;
+    color: var(--text-secondary);
 }
 
 .slot-details h1 {
     margin-bottom: 10px;
-    color: #ffffff;
+    color: var(--text-heading);
 }
 
 .slot-details h2 {
     margin-bottom: 20px;
-    color: #818cf8;
+    color: var(--accent);
 }
 
 .slot-info {
@@ -34,11 +34,11 @@
     padding: 10px 0;
     margin: 0;
 
-    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    border-bottom: 1px solid var(--border-faint);
 }
 
 .slot-info strong {
-    color: #9ca3af;
+    color: var(--text-muted);
     font-weight: 500;
 }
 
@@ -47,7 +47,7 @@
     margin-bottom: 10px !important;
 
     font-weight: 600;
-    color: #ffffff;
+    color: var(--text-heading);
 }
 
 .slot-members {
@@ -61,11 +61,11 @@
 .slot-member {
     padding: 10px 12px;
 
-    background: rgba(255, 255, 255, 0.04);
-    border: 1px solid rgba(255, 255, 255, 0.06);
+    background: var(--surface-hover);
+    border: 1px solid var(--border-faint);
     border-radius: 8px;
 }
 
 .slot-member span {
-    color: #e5e7eb;
+    color: var(--text-secondary);
 }

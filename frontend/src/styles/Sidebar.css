@@ -2,9 +2,9 @@
     width: 250px;
     height: 100vh;
 
-    background: #0a0a0a;
-    border-right: 1px solid rgba(255, 255, 255, 0.08);
-    color: #f5f5f5;
+    background: var(--bg-void);
+    border-right: 1px solid var(--border-subtle);
+    color: var(--text-primary);
 
     padding: 20px;
 
@@ -25,7 +25,7 @@
 }
 
 .sidebar a {
-    color: #e5e7eb;
+    color: var(--text-secondary);
     text-decoration: none;
     display: block;
     margin: 3px 12px;
@@ -35,14 +35,14 @@
 }
 
 .sidebar a:hover {
-    color: #ffffff;
-    background: rgba(129, 140, 248, 0.15);
+    color: var(--text-heading);
+    background: var(--accent-hover-bg);
 }
 
 .sidebar a.active {
-    background: rgba(129, 140, 248, 0.25);
-    border: 1px solid rgba(129, 140, 248, 0.5);
-    color: #ffffff;
+    background: var(--accent-active-bg);
+    border: 1px solid var(--accent-border);
+    color: var(--text-heading);
 }
 
 .sidebar-close {
@@ -60,7 +60,7 @@
 .sidebar hr {
     margin: 3px 0;
     border: none;
-    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    border-top: 1px solid var(--border-subtle);
 }
 
 @media (max-width: 768px) {
@@ -116,7 +116,7 @@
         border: none;
         border-radius: 8px;
 
-        background: #0a0a0a;
+        background: var(--bg-void);
         color: white;
 
         font-size: 24px;
