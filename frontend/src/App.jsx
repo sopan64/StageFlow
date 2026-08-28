@@ -72,7 +72,7 @@ function App(){
           })
         ]);
       
-      if (!eventResponse.ok || !slotsResponse.ok || !announcementsResponse.ok || !usersRespponse) {
+      if (!eventResponse.ok || !slotsResponse.ok || !announcementsResponse.ok || !usersRespponse.ok) {
         throw new Error("Failed to fetch initial details!");
       }
 
