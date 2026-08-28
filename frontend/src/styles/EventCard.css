@@ -1,5 +1,7 @@
 .event-card {
-    background: var(--bg-card);
+    background: var(--bg-glass-card);
+    backdrop-filter: var(--blur-glass);
+    -webkit-backdrop-filter: var(--blur-glass);
     border: 1px solid var(--border-subtle);
     border-radius: 16px;
     box-shadow: var(--shadow-card);

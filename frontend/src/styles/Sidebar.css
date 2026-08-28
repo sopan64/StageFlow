@@ -2,7 +2,9 @@
     width: 250px;
     height: 100vh;
 
-    background: var(--bg-void);
+    background: var(--bg-glass-void);
+    backdrop-filter: var(--blur-glass);
+    -webkit-backdrop-filter: var(--blur-glass);
     border-right: 1px solid var(--border-subtle);
     color: var(--text-primary);
 

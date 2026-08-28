@@ -2,8 +2,10 @@ import { useState } from "react";
 import AdminOnlyOverlay from "../components/AdminOnlyOverlay";
 import "../styles/ManageUsers.css";
 import Button from "../components/Button";
+import { useToast } from "../context/ToastContext";
 
 function ManageUsers({ users, setUsers }) {
+    const { showToast } = useToast();
 
     async function handleRole(id, role){
         try{
@@ -25,7 +27,7 @@ function ManageUsers({ users, setUsers }) {
             );
         }
         catch(err){
-            alert(err.message);
+            showToast(err.message, "error");
         }
     }
     

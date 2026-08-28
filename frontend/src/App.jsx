@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { useState, useEffect } from "react";
+import { useToast } from "./context/ToastContext";
 import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
 import Attendance from "./pages/Attendance";
@@ -20,12 +21,30 @@ function App(){
   const [announcements, setAnnouncements] = useState([]);
   const [event, setEvent] = useState([]);
   const [users, setUsers] = useState([]);
+  const [connectionStatus, setConnectionStatus] = useState("idle");
+  const [retryTrigger, setRetryTrigger] = useState(0);
+  const { showToast } = useToast();
 
   useEffect(() => {
-    async function fetchInitialDetails(){
-      try{
+    let cancelled = false;
+    const MAX_ATTEMPTS = 5;
+
+    function sleep(ms) {
+      return new Promise((resolve) => setTimeout(resolve, ms));
+    }
+
+    async function fetchInitialDetails(attempt = 1){
       const token = localStorage.getItem("token");
 
+      if (!token) {
+        return;
+      }
+
+      if (attempt === 1) {
+        setConnectionStatus("idle");
+      }
+
+      try{
       const [eventResponse, slotsResponse, announcementsResponse, usersRespponse] =
         await Promise.all([
           fetch(`${import.meta.env.VITE_API_URL}/event`, {
@@ -62,25 +81,42 @@ function App(){
       const announcementsData = await announcementsResponse.json();
       const usersData = await usersRespponse.json();
 
+      if (cancelled) return;
+
       setEvent(eventData);
       setSlots(slotsData);
       setAnnouncements(announcementsData);
       setUsers(usersData);
+      setConnectionStatus("idle");
       }
       catch (err) {
-        alert(err.message);
+        if (cancelled) return;
+
+        if (attempt < MAX_ATTEMPTS) {
+          setConnectionStatus("retrying");
+          const delay = Math.min(3000 * attempt, 10000);
+          await sleep(delay);
+          if (cancelled) return;
+          return fetchInitialDetails(attempt + 1);
+        }
+
+        setConnectionStatus("failed");
       }
     }
 
     fetchInitialDetails();
 
-  }, []);
+    return () => {
+      cancelled = true;
+    };
+
+  }, [retryTrigger]);
 
   async function handleDeleteSlot(id){
     const slotToDelete = slots.find((slot) => slot._id === id);
     
     if(!slotToDelete){
-      alert("Slot not found!");
+      showToast("Slot not found!", "error");
       return;
     }
     
@@ -127,40 +163,55 @@ function App(){
       ]);
     }
     catch (err) {
-      alert(err.message);
+      showToast(err.message, "error");
     }
 
   }
 
   return(
-    <BrowserRouter>
-      <Routes>
+    <>
+      {connectionStatus === "retrying" && (
+        <div className="connection-banner connection-banner-retrying">
+          Connecting to server... this can take up to a minute if it's been idle.
+        </div>
+      )}
 
-        <Route path="/" element={<Login />} />
-        <Route path="/register" element={<Register />} />
+      {connectionStatus === "failed" && (
+        <div className="connection-banner connection-banner-failed">
+          Couldn't reach the server.
+          <button onClick={() => setRetryTrigger((n) => n + 1)}>Retry</button>
+        </div>
+      )}
 
-        <Route element={<ProtectedRoute />} >
-          <Route element={<MainLayout />} >
-            <Route path="/manage-slots" element={<ManageSlots slots={slots} setSlots={setSlots} handleDeleteSlot={handleDeleteSlot}
-            announcements={announcements} setAnnouncements={setAnnouncements}/>} />
-            <Route path="/dashboard" element={<Dashboard slots={slots} event={event} />} />
-            <Route path="/attendance" element={<Attendance />} />
-            <Route path="/announcements" element={<Announcements announcements={announcements} />} />
-            <Route path="/manage-announcements" element={<ManageAnnouncements announcements={announcements} setAnnouncements={setAnnouncements}/>} />
-            <Route path="/slotdetails/:id" element={<SlotDetails slots={slots} />} />
-            <Route path="/edit-slot/:id" element={<EditSlot slots={slots} setSlots={setSlots} announcements={announcements} setAnnouncements={setAnnouncements}/>} />
-            <Route path="/manage-users" element={<ManageUsers users={users} setUsers={setUsers}/>} />
-            <Route path="/manage-event" 
-              element={ event.length > 0 
-                ? <ManageEvent event={event} setEvent={setEvent} announcements={announcements} setAnnouncements={setAnnouncements}/>
-                : <p className="empty-message">No any event yet...</p>
-              } 
-            />
+      <BrowserRouter>
+        <Routes>
+
+          <Route path="/" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+
+          <Route element={<ProtectedRoute />} >
+            <Route element={<MainLayout />} >
+              <Route path="/manage-slots" element={<ManageSlots slots={slots} setSlots={setSlots} handleDeleteSlot={handleDeleteSlot}
+              announcements={announcements} setAnnouncements={setAnnouncements}/>} />
+              <Route path="/dashboard" element={<Dashboard slots={slots} event={event} />} />
+              <Route path="/attendance" element={<Attendance />} />
+              <Route path="/announcements" element={<Announcements announcements={announcements} />} />
+              <Route path="/manage-announcements" element={<ManageAnnouncements announcements={announcements} setAnnouncements={setAnnouncements}/>} />
+              <Route path="/slotdetails/:id" element={<SlotDetails slots={slots} />} />
+              <Route path="/edit-slot/:id" element={<EditSlot slots={slots} setSlots={setSlots} announcements={announcements} setAnnouncements={setAnnouncements}/>} />
+              <Route path="/manage-users" element={<ManageUsers users={users} setUsers={setUsers}/>} />
+              <Route path="/manage-event" 
+                element={ event.length > 0 
+                  ? <ManageEvent event={event} setEvent={setEvent} announcements={announcements} setAnnouncements={setAnnouncements}/>
+                  : <p className="empty-message">No any event yet...</p>
+                } 
+              />
+            </Route>
           </Route>
-        </Route>
 
-      </Routes>
-    </BrowserRouter>
+        </Routes>
+      </BrowserRouter>
+    </>
   );
 }
 

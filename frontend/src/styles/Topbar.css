@@ -1,6 +1,8 @@
 .topbar {
     height: 70px;
-    background: var(--bg-panel);
+    background: var(--bg-glass-panel);
+    backdrop-filter: var(--blur-glass);
+    -webkit-backdrop-filter: var(--blur-glass);
     border-bottom: 1px solid var(--border-subtle);
 
     display: flex;

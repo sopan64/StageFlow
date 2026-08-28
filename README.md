@@ -1,11 +1,9 @@
 # 🎭 StageFlow
 
-![Status](https://img.shields.io/badge/Status-Frontend%20Completed-success)
-![React](https://img.shields.io/badge/React-61DAFB?logo=react&logoColor=white)
+![Status](https://img.shields.io/badge/Status-V1.0-success)
+![React](https://img.shields.io/badge/React-61DAFB?logo=react\&logoColor=white)
 
-A modern React-based Club Event & Practice Management System designed to simplify event organization, practice scheduling, attendance tracking, and communication within college clubs.
-
-> 🚀 Frontend completed and deployed. Backend integration is currently in progress.
+A modern full-stack Club Event & Practice Management System designed to simplify event organization, practice scheduling, member management, and communication within college clubs.
 
 ## 🌐 Live Demo
 
@@ -17,39 +15,32 @@ A modern React-based Club Event & Practice Management System designed to simplif
 
 ## 📖 Overview
 
-StageFlow is inspired by the workflow of college cultural clubs, providing a centralized platform where administrators can manage events, practice slots, announcements, and attendance while members can view schedules and event updates.
+StageFlow is inspired by the workflow of college cultural clubs, providing a centralized platform where administrators can manage events, practice slots, members, coordinators, and announcements while members can view their assigned slots and event updates.
 
-The project is being developed as a full-stack application while learning modern web development using React, Node.js, Express, and MongoDB.
+The project is built using React, Node.js, Express, and MongoDB.
 
 ---
 
 ## ✨ Features
 
-### ✅ Frontend Completed
+### ✅ V1 Features
 
-- Dashboard with current event overview
-- Event Management
-- Slot Management (Create, Read, Update, Delete)
-- Dynamic Slot Details page
-- Attendance Management UI
-- Announcements
-- Admin Announcement Management
-- Shared state management using React Hooks
-- Client-side routing with React Router
-- Reusable React components
-- Reusable Button and Input components
-- Form validation
-- Responsive desktop interface
-- Live deployment using Vercel
-
-### 🚧 Backend In Progress
-
-- Express.js REST APIs
-- MongoDB Integration
-- Authentication
-- Role-based access (Admin & Member)
-- Persistent database
-- API integration with React frontend
+* Dashboard with current event overview
+* Event Management
+* Slot Management (Create, Read, Update, Delete)
+* Member search and assignment
+* Coordinator assignment
+* My Slots for assigned members
+* Dynamic Slot Details page
+* Announcements
+* Admin Announcement Management
+* User Management
+* Authentication
+* Role-based access (Admin & Member)
+* Form validation
+* Responsive interface
+* REST API integration
+* MongoDB database
 
 ---
 
@@ -57,25 +48,28 @@ The project is being developed as a full-stack application while learning modern
 
 ### Frontend
 
-- React
-- React Router
-- JavaScript
-- HTML5
-- CSS3
-- Vite
+* React
+* React Router
+* JavaScript
+* HTML5
+* CSS3
+* Vite
 
-### Backend (In Progress)
+### Backend
 
-- Node.js
-- Express.js
-- MongoDB
+* Node.js
+* Express.js
+* MongoDB
+* Mongoose
+* JWT
+* bcrypt
 
 ### Tools
 
-- Git
-- GitHub
-- VS Code
-- Vercel
+* Git
+* GitHub
+* VS Code
+* Vercel
 
 ---
 
@@ -121,34 +115,39 @@ Run the development server
 npm run dev
 ```
 
+For the backend, configure the required environment variables and start the Express server from the `backend` directory.
+
 ---
 
 ## 🎯 What I'm Learning
 
 Through this project, I'm gaining practical experience in:
 
-- React component architecture
-- Client-side routing
-- State management
-- CRUD operations
-- Reusable component design
-- Form validation
-- Express.js
-- REST APIs
-- MongoDB
-- Full-stack application development
+* React component architecture
+* Client-side routing
+* State management
+* CRUD operations
+* Reusable component design
+* Form validation
+* Express.js
+* REST APIs
+* MongoDB
+* Authentication & Authorization
+* Full-stack application development
 
 ---
 
 ## 📌 Roadmap
 
-- ✅ Frontend Development
-- ✅ UI Deployment (Vercel)
-- 🚧 Express Backend
-- 🚧 MongoDB Database
-- 🚧 Authentication
-- 🚧 API Integration
-- 🚧 Role-based Access
+* ✅ Frontend Development
+* ✅ UI Deployment
+* ✅ Express Backend
+* ✅ MongoDB Database
+* ✅ Authentication
+* ✅ API Integration
+* ✅ Role-based Access
+* 🔜 Attendance Management
+* 🔜 Coordinator-specific features
 
 ---
 
@@ -156,5 +155,5 @@ Through this project, I'm gaining practical experience in:
 
 **Sopan Dharmpuri Avdhutwar**
 
-- GitHub: https://github.com/sopan64
-- LinkedIn: https://www.linkedin.com/in/sopan-avdhutwar
+* GitHub: https://github.com/sopan64
+* LinkedIn: https://www.linkedin.com/in/sopan-avdhutwar
