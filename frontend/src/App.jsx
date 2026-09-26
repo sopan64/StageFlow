@@ -35,6 +35,7 @@ function App(){
 
     async function fetchInitialDetails(attempt = 1){
       const token = localStorage.getItem("token");
+      const user = JSON.parse(localStorage.getItem("user"));
 
       if (!token) {
         return;
@@ -63,23 +64,32 @@ function App(){
             headers: {
               "Authorization": `Bearer ${token}`
             }
-          }),
-
-          fetch(`${import.meta.env.VITE_API_URL}/users`, {
-            headers: {
-              "Authorization": `Bearer ${token}`
-            }
           })
         ]);
       
-      if (!eventResponse.ok || !slotsResponse.ok || !announcementsResponse.ok || !usersRespponse.ok) {
+      if (!eventResponse.ok || !slotsResponse.ok || !announcementsResponse.ok) {
         throw new Error("Failed to fetch initial details!");
       }
 
       const eventData = await eventResponse.json();
       const slotsData = await slotsResponse.json();
       const announcementsData = await announcementsResponse.json();
-      const usersData = await usersRespponse.json();
+
+      let usersData = [];
+
+      if(user?.role === "admin") {
+        const usersRespponse = await fetch(`${import.meta.env.VITE_API_URL}/users`, {
+            headers: {
+              "Authorization": `Bearer ${token}`
+            }
+        });
+        
+        if(!usersRespponse.ok){
+          throw new Error("Failed to fetch initial details!");
+        }
+
+        usersData = await usersRespponse.json();
+      }
 
       if (cancelled) return;
 

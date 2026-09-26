@@ -6,7 +6,7 @@
   "coordinator": "purva oak",
   "date": "28 July",
   "time": "6 PM",
-  "venue": "music room",
+  "venue": "Music room",
   "members": 6,
   "createdAt": {
     "$date": "2026-07-27T14:43:17.256Z"
@@ -55,7 +55,7 @@
   "_id": {
     "$oid": "6a6b5813e4edea65c3d60cbf"
   },
-  "title": "Imotionaly Intense",
+  "title": "Emotionaly Intense",
   "coordinator": "Bhavana",
   "time": "9 pm",
   "venue": "Music room",
