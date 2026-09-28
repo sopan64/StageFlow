@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import Input from "../components/Input";
@@ -8,24 +8,34 @@ import "../styles/EditSlot.css";
 function EditSlot({ slots, setSlots, announcements, setAnnouncements }){
 
     const { id } = useParams();
+    const navigate = useNavigate();
 
     const slot = slots.find(
         (slot) => slot._id === id
     );
 
+    const [name, setName] = useState("");
+    const [coordinator, setCoordinator] = useState(null);
+    const [time, setTime] = useState("");
+    const [members, setMembers] = useState([]);
+    const [memberEmail, setMemberEmail] = useState("");
+    const [memberResults, setMemberResults] = useState([]);
+    const [venue, setVenue] = useState("");
+    const [error, setError] = useState("");
+
+    useEffect(() => {
+        if (slot) {
+            setName(slot.title);
+            setCoordinator(slot.coordinator);
+            setTime(slot.time);
+            setMembers(slot.members);
+            setVenue(slot.venue);
+        }
+    }, [slot]);
+
     if(!slot){
         return <h2>Slot not found!</h2>;
     }
-
-    const [name, setName] = useState(slot.title);
-    const [coordinator, setCoordinator] = useState(slot.coordinator);
-    const [time, setTime] = useState(slot.time);
-    const [members, setMembers] = useState(slot.members);
-    const [memberEmail, setMemberEmail] = useState("");
-    const [memberResults, setMemberResults] = useState([]);
-    const [venue, setVenue] = useState(slot.venue);
-    const [error, setError] = useState("");
-    const navigate = useNavigate();
 
 async function searchMembers(email) {
     setMemberEmail(email);

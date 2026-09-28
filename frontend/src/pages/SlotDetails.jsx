@@ -1,9 +1,12 @@
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import "../styles/SlotDetails.css";
+import Button from "../components/Button";
 
 function SlotDetails({ slots }) {
 
     const { id } = useParams();
+    const navigate = useNavigate();
+    const user = JSON.parse(localStorage.getItem("user"));
 
     const slot = slots.find(
         (slot) => slot._id === id
@@ -46,6 +49,10 @@ function SlotDetails({ slots }) {
                         </div>
                     ))}
                 </div>
+
+                {user?.id === slot.coordinator?._id && (
+                    <Button text="Edit slot" onClick={()=>navigate(`/edit-slot/${id}`)}/>
+                )}
             </div>
         </div>
     );

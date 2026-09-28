@@ -16,7 +16,7 @@ return (
 
         {mySlots.length === 0 ? (
             <p className="empty-message">
-                You're not assigned to any slots yet...
+                You're not assigned to any slots yet.
             </p>
         ) : (
             mySlots.map((slot) => (

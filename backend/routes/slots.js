@@ -36,8 +36,9 @@ router.post("/", auth, admin, async (req, res) => {
     }
 });
 
-router.put("/:id", auth, admin, async (req, res) => {
+router.put("/:id", auth, async (req, res) => {
     try {
+        console.log("Sopan Sopan");
         const updatedSlot = await Slot.findByIdAndUpdate(
             req.params.id,
             req.body,
