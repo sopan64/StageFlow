@@ -19,7 +19,7 @@ router.get("/", auth, async (req, res) => {
     }
 });
 
-router.post("/", auth, admin, async (req, res) => {
+router.post("/", auth, async (req, res) => {
     try{
         const newAnnouncement = await Announcement.create(req.body);
 
