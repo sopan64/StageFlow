@@ -24,7 +24,7 @@ router.get("/search", auth, admin, async (req, res) => {
     }
 });
 
-router.get("/", auth, admin, async(req, res) => {
+router.get("/", auth, async(req, res) => {
     try{
         const users = await User.find().select("-password");
 

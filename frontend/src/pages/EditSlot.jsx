@@ -139,7 +139,7 @@ async function searchMembers(email) {
             ]);
 
             setError("");
-            navigate("/manage-slots", {replace: true});
+            navigate("/dashboard", {replace: true});
 
         } 
         catch (err) {

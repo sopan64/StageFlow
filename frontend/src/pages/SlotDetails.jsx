@@ -21,6 +21,12 @@ function SlotDetails({ slots }) {
             <div className="slot-details-content">
                 <h1>Slot Details</h1>
 
+                {user?.id === slot.coordinator?._id && (
+                    <p className="coordinator-access">
+                        <span>Coordinator access</span> . You can edit this slot
+                    </p>
+                )}
+
                 <h2>{slot.title}</h2>
 
                 <div className="slot-info">
@@ -50,7 +56,7 @@ function SlotDetails({ slots }) {
                     ))}
                 </div>
 
-                {user?.id === slot.coordinator?._id && (
+                {(user?.id === slot.coordinator?._id || user?.role === "admin") && (
                     <Button text="Edit slot" onClick={()=>navigate(`/edit-slot/${id}`)}/>
                 )}
             </div>

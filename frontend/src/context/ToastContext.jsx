@@ -11,9 +11,7 @@ export function ToastProvider({ children }) {
     const dismissToast = useCallback((id) => {
         setToasts((prevToasts) => prevToasts.filter((toast) => toast.id !== id));
     }, []);
-
-    // type: "error" | "success" | "info"
-    // duration: ms before auto-dismiss, or 0 to require manual close
+    
     const showToast = useCallback((message, type = "info", duration = 4000) => {
         const id = ++idCounter;
         setToasts((prevToasts) => [...prevToasts, { id, message, type }]);

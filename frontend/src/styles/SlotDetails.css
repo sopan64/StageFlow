@@ -56,6 +56,7 @@
     gap: 8px;
 
     margin-top: 10px;
+    margin-bottom: 10px;
 }
 
 .slot-member {
@@ -64,8 +65,21 @@
     background: var(--surface-hover);
     border: 1px solid var(--border-faint);
     border-radius: 8px;
+
 }
 
 .slot-member span {
     color: var(--text-secondary);
+}
+
+.coordinator-access {
+  font-size: 13px;
+  color: #858591;
+  margin: 4px 0 0;
+  margin-bottom: 10px;
+}
+
+.coordinator-access span {
+  color: #9b9bf5;
+  font-weight: 500;
 }
