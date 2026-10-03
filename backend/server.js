@@ -6,6 +6,7 @@ const slotsRouter = require("./routes/slots");
 const announcementsRouter = require("./routes/announcements");
 const eventRouter = require("./routes/event");
 const userRouter = require("./routes/users");
+const slotBookingRouter = require("./routes/slotBookings");
 
 const cors = require("cors");
 
@@ -39,6 +40,8 @@ app.use("/announcements", announcementsRouter);
 app.use("/event", eventRouter);
 
 app.use("/users", userRouter);
+
+app.use("/slots-booking", slotBookingRouter);
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {

@@ -31,6 +31,7 @@ function Sidebar({ isOpen, onClose }){
             
             <NavLink to="/announcements" onClick={handleNavClick}>Announcements</NavLink>
             <hr />
+            <NavLink to="/manage-slots-booking" onClick={handleNavClick}>Manage Slots Booking</NavLink>
             <NavLink to="/manage-slots" onClick={handleNavClick}>Manage Slots</NavLink>
             <NavLink to="/manage-announcements" onClick={handleNavClick}>Manage Announcements</NavLink>
             <NavLink to="/manage-event" onClick={handleNavClick}>Manage Event</ NavLink>

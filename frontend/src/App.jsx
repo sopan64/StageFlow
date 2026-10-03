@@ -14,6 +14,7 @@ import ManageEvent from "./pages/ManageEvent";
 import Register from "./pages/Register";
 import ProtectedRoute from "./components/ProtectedRoute";
 import ManageUsers from "./pages/ManageUsers";
+import ManageSlotBookings from "./pages/ManageSlotBookings";
 
 function App(){
 
@@ -205,6 +206,7 @@ function App(){
               announcements={announcements} setAnnouncements={setAnnouncements}/>} />
               <Route path="/dashboard" element={<Dashboard slots={slots} event={event} />} />
               <Route path="/attendance" element={<Attendance />} />
+              <Route path="/manage-slots-booking" element={<ManageSlotBookings slots={slots} />}/>
               <Route path="/announcements" element={<Announcements announcements={announcements} />} />
               <Route path="/manage-announcements" element={<ManageAnnouncements announcements={announcements} setAnnouncements={setAnnouncements}/>} />
               <Route path="/slotdetails/:id" element={<SlotDetails slots={slots} />} />
