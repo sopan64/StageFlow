@@ -73,10 +73,8 @@ function ManageSlotBookings({ slots }) {
 
     const data = await response.json();
 
-    if (!response.ok) {
-        showToast(data.message || "Failed to book slot!", "error");
-        return;
-    }
+    console.log("Booking response:", data);
+showToast(data.message || "Failed to book slot!", "error");
 
     setBookings((prev) => [...prev, data.booking]);
     showToast("Slot booked successfully!", "success");
@@ -144,7 +142,7 @@ function ManageSlotBookings({ slots }) {
         }
     />
 
-    <Button text="Book Slot" onClick={() => handleBook}/>
+    <Button text="Book Slot" onClick={() => handleBook(slot)}/>
 </div>
                         )}
 

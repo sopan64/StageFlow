@@ -63,8 +63,8 @@ router.post("/", auth, async (req, res) => {
 
         const booking = await SlotBooking.create({
             slot: slotId,
-            startTime: newStart,
-            endTime: newEnd,
+            startTime,
+            endTime,
             bookedBy: req.user.id,
             expiresAt
         });
