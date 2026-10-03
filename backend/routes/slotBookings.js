@@ -39,6 +39,17 @@ router.post("/", auth, async (req, res) => {
             });
         }
 
+        const existingBooking = await SlotBooking.findOne({
+            slot: slotId,
+            expiresAt: { $gt: new Date() }
+        });
+
+        if (existingBooking) {
+            return res.status(400).json({
+                message: "This slot is already booked for today!"
+            });
+        }
+
         const now = new Date();
 
         const existingBookings = await SlotBooking.find({
