@@ -24,7 +24,7 @@ const slotBookingSchema = new mongoose.Schema({
         required: true
     },
 
-    expireAt: {
+    expiresAt: {
         type: Date,
         required: true
     }
