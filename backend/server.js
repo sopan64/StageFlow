@@ -41,7 +41,7 @@ app.use("/event", eventRouter);
 
 app.use("/users", userRouter);
 
-app.use("/slots-booking", slotBookingRouter);
+app.use("/slot-bookings", slotBookingRouter);
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
